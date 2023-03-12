@@ -11,15 +11,15 @@ function Sidebar() {
     <div className='min-h-full bg-sidebar w-64 mt-16 fixed'>
         <section>
             <ul className='w-full pt-6 flex flex-col text-lg text-gray-400 items-left'>
-                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 hover:text-white' to='/'><li className='flex items-center gap-3'><BsFillHouseFill/> Home</li></NavLink>
-                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 hover:text-white' to='/branches'><li className='flex items-center gap-3'><HiBuildingOffice/>Branches</li></NavLink>
-                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 hover:text-white' to='/internet'><li className='flex items-center gap-3'><FaInternetExplorer/>Internet Accounts</li></NavLink>
-                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 hover:text-white' to='/firewall'><li className='flex items-center gap-3'><BsFillShieldLockFill/>Firewall</li></NavLink>
-                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 hover:text-white' to='/switches'><li className='flex items-center gap-3'><BsHddNetworkFill/>Switches</li></NavLink>
-                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 hover:text-white' to='/wireless'><li className='flex items-center gap-3'><FaWifi/>Wireless</li></NavLink>
-                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 hover:text-white' to='/access-points'><li className='flex items-center gap-3'><MdRouter/>Access Points</li></NavLink>
-                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 hover:text-white' to='/diagrams'><li className='flex items-center gap-3'><BsFillDiagram3Fill/>Diagrams</li></NavLink>
-                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 hover:text-white' to='/settings'><li className='flex items-center gap-3'><MdSettings/>Settings</li></NavLink>
+                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/'><li className='flex items-center gap-3'><BsFillHouseFill/> Home</li></NavLink>
+                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/branches'><li className='flex items-center gap-3'><HiBuildingOffice/>Branches</li></NavLink>
+                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/internet'><li className='flex items-center gap-3'><FaInternetExplorer/>Internet Accounts</li></NavLink>
+                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/firewall'><li className='flex items-center gap-3'><BsFillShieldLockFill/>Firewall</li></NavLink>
+                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/switches'><li className='flex items-center gap-3'><BsHddNetworkFill/>Switches</li></NavLink>
+                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/wireless'><li className='flex items-center gap-3'><FaWifi/>Wireless</li></NavLink>
+                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/access-points'><li className='flex items-center gap-3'><MdRouter/>Access Points</li></NavLink>
+                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/diagrams'><li className='flex items-center gap-3'><BsFillDiagram3Fill/>Diagrams</li></NavLink>
+                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/settings'><li className='flex items-center gap-3'><MdSettings/>Settings</li></NavLink>
                 
             </ul>
         </section>

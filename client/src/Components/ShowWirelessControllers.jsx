@@ -37,7 +37,7 @@ function ShowWirelessControllers() {
               <h2 className='text-2xl font-bold'>{(branches.find(e => e.branch_code == branch)).name}</h2>
               <h3 className='text-lg font-bold'>Wireless Controllers</h3>
               <table className='text-center w-full'>
-                <tr className='bg-purple-500'>
+                <tr className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
                   <th>Location</th>
                   <th>Name</th>
                   <th>Model</th>
@@ -65,7 +65,7 @@ function ShowWirelessControllers() {
           <div className='flex flex-col w-full'>
           <h3 className='text-lg font-bold'>SSID</h3>
           <table className='text-center w-full'>
-            <tr className='bg-purple-500'>
+            <tr className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
               <th>Branch</th>
               <th>Controller</th>
               <th>SSID</th>

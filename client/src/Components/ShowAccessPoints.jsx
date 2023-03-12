@@ -25,7 +25,7 @@ function ShowAccessPoints() {
           return(<div className='w-full'>
             <h2 className='text-2xl font-bold mb-2'>{(branches.find(e => e.branch_code == branch)).name}</h2>
           <table className='w-full text-center'>
-            <tr className='bg-purple-500'>
+            <tr className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
               <th>Branch</th>
               <th>Controller</th>
               <th>Name</th>
