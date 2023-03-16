@@ -243,3 +243,40 @@ export const getAllSSIDDetails = async ()=>{
         console.log("Error in getting data",error)
     }
 }
+
+export const userSignUp = async (user_data) =>{
+    try{
+        const signupResponse = await axios.post(`${server}/signup`, user_data)
+        console.log("Response in API",signupResponse)
+        return signupResponse
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+export const userLogin = async (user_data) =>{
+    try{
+        const lgoinResponse = await axios.post(`${server}/login`, user_data)
+        console.log("Login Response",lgoinResponse)
+        return lgoinResponse
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+export const checkLoginStatus = async ()=>{
+    try{
+        const loginStatus = await axios.get(`${server}/isAuthenticated`,{
+            headers:{
+                "x-access-token":localStorage.getItem("token")
+            }
+        }) //{isLogged: true, user: req.user}
+        console.log("From API: ",loginStatus.data)
+        return loginStatus.data
+    }
+    catch(error){
+        console.log(error)
+    }
+}

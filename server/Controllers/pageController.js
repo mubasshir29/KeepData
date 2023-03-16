@@ -1,3 +1,6 @@
+import bcrypt from 'bcryptjs'
+import jwt from 'jsonwebtoken'
+import User from './../Models/userModel.js'
 import branchModel from './../Models/AddBranch.js'
 import internetConnectionModel from './../Models/internetConnectionModel.js'
 import firewallModel from './../Models/FirewallModel.js'
@@ -78,8 +81,8 @@ export const getInternetDetails = async (req,res)=>{
 }
 
 export const addFirewall = async (req,res)=>{
-    console.log("Data received at backend")
-    console.log(req.body)
+    //console.log("Data received at backend")
+    //console.log(req.body)
     try{
         const newFirewall = firewallModel(req.body)
         await newFirewall.save()
@@ -91,7 +94,7 @@ export const addFirewall = async (req,res)=>{
     }
 }
 export const getFirewallDetails = async (req,res)=>{
-    console.log("Request for Firewall details")
+    //console.log("Request for Firewall details")
     try{
         if(req.params.id){
             const id = req.params.id
@@ -124,7 +127,7 @@ export const addSwitch = async (req,res)=>{
     }
 }
 export const getSwitchDetails = async (req,res)=>{
-    console.log("Request for Firewall details")
+    //console.log("Request for Firewall details")
     try{
         if(req.params.id){
             const id = req.params.id
@@ -157,7 +160,7 @@ export const addWLC = async (req,res)=>{
     }
 }
 export const getWLCDetails = async (req,res)=>{
-    console.log("Request for Firewall details")
+    //console.log("Request for Firewall details")
     try{
         if(req.params.id){
             const id = req.params.id
@@ -190,7 +193,7 @@ export const addAP = async (req,res)=>{
     }
 }
 export const getAPDetails = async (req,res)=>{
-    console.log("Request for Firewall details")
+    //console.log("Request for Firewall details")
     try{
         if(req.params.id){
             const id = req.params.id
@@ -223,7 +226,7 @@ export const addSSID = async (req,res)=>{
     }
 }
 export const getSSIDDetails = async (req,res)=>{
-    console.log("Request for Firewall details")
+    //console.log("Request for Firewall details")
     try{
         if(req.params.id){
             const id = req.params.id
@@ -240,4 +243,80 @@ export const getSSIDDetails = async (req,res)=>{
     catch(error){
         console.log("Error:",error)
     }
+}
+
+export const loginHandler = async (req,res)=>{
+    try{
+        //get user input
+        const {email,password} = req.body;
+
+       //check all inputs are entered
+       if(!(email && password)){
+            res.status(400).json({"msg":"All inputs are required"})
+       }
+
+       //check if user exists
+       const user = await User.findOne({email})
+
+       if(user && (await bcrypt.compare(password, user.password))){
+        const token = jwt.sign(
+            {user_id: user._id, user_name:user.first_name},
+            process.env.JWT_SECRET,
+            {
+                expiresIn:"2h"
+            }
+        )
+        user.token = token
+
+        res.status(200).json(user)
+       }
+       else res.status(401).json({"msg":"Incorrect credentials"})
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+export const signupHandler = async (req,res)=>{
+    try{
+        //read all entered inputs
+        const {first_name,last_name,email,password} = req.body;
+
+        //Check all the requried fields are entered
+        if(!(first_name && last_name && email && password)){
+            res.status(400).json({"msg":"All inputs are required"})
+        }
+
+        //validate if entered email already exists
+        const existUser = await User.findOne({email})
+        
+        if(existUser){
+            console.log("exisUser",existUser)
+            res.status(400).json({"msg":"Email already exist, please login"})
+        }
+
+        //encrypt password
+        const encryptedPassword = await bcrypt.hash(password,10)
+
+        //Create user in database
+        const user = new User({...req.body, email: email.toLowerCase() , password: encryptedPassword })
+        await user.save()
+
+        //create a token
+        const token = jwt.sign(
+            {user_id: user._id, email},
+            process.env.JWT_SECRET,
+            {
+                expiresIn: "2h"
+            }
+        )
+        user.token = token
+        res.status(201).json(user)
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+export const checkAuthentication = (req,res)=>{
+    res.json({isLogged: true, user: req.user})
 }

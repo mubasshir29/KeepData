@@ -22,6 +22,9 @@ import AddWLC from './Components/AddWLC';
 import AddSSID from './Components/AddSSID';
 import AddAP from './Components/AddAP';
 import AddDiag from './Components/AddDiag';
+import LoginPage from './Components/LoginPage';
+import SignupPage from './Components/SignupPage';
+import SignupSuccess from './Components/SignupSuccess'
 
 function App() {
   return (
@@ -48,6 +51,9 @@ function App() {
           <Route path='settings/add-ssid' element={<AddSSID/>} />
           <Route path='settings/add-ap' element={<AddAP/>} />
           <Route path='settings/add-diag' element={<AddDiag/>} />
+          <Route path='/login' element={<LoginPage/>} />
+          <Route path='/signup' element={<SignupPage/>} />
+          <Route path='/signupSuccess' element={<SignupSuccess/>} />
         </Routes>
       </main>
     </div>

@@ -15,7 +15,7 @@ function DataContextProvider(props) {
 
     const getBranchDetails = async ()=>{
         const result = await getAllBranches()
-        console.log("All branches:",result)
+        //console.log("All branches:",result)
         setBranches(result)
       }
     const getConnectionDetails = async ()=>{

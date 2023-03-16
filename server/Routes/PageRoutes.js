@@ -1,6 +1,7 @@
 import express from 'express'
-import {getHomeData, addBranch,getBranchDetails,addInternetConnection,getInternetDetails,getFirewallDetails,addFirewall,getSwitchDetails,addSwitch,addWLC,getWLCDetails,addAP,getAPDetails,addSSID,getSSIDDetails} from './../Controllers/pageController.js'
+import {getHomeData, addBranch,getBranchDetails,addInternetConnection,getInternetDetails,getFirewallDetails,addFirewall,getSwitchDetails,addSwitch,addWLC,getWLCDetails,addAP,getAPDetails,addSSID,getSSIDDetails,signupHandler,loginHandler,checkAuthentication} from './../Controllers/pageController.js'
 const pageRouter = express.Router()
+import verifyToken from './../Middleware/verifyToken.js'
 
 pageRouter.get('/',getHomeData)
 pageRouter.get('/branch',getBranchDetails)
@@ -30,5 +31,9 @@ pageRouter.post('/new/ap',addAP)
 pageRouter.get('/ssid',getSSIDDetails)
 pageRouter.get('/ssid/:id',getSSIDDetails)
 pageRouter.post('/new/ssid',addSSID)
+
+pageRouter.post('/login',loginHandler)
+pageRouter.post('/signUp',signupHandler)
+pageRouter.get('/isAuthenticated', verifyToken, checkAuthentication)
 
 export default pageRouter;
