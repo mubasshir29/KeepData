@@ -245,13 +245,16 @@ export const getAllSSIDDetails = async ()=>{
 }
 
 export const userSignUp = async (user_data) =>{
+    //console.log(user_data)
+    let signupResponse;
     try{
-        const signupResponse = await axios.post(`${server}/signup`, user_data)
+        signupResponse = await axios.post(`${server}/signup`, user_data)
         console.log("Response in API",signupResponse)
         return signupResponse
     }
     catch(error){
-        console.log(error)
+        console.log("signupResponse:",error.response.status)
+        return error.response
     }
 }
 

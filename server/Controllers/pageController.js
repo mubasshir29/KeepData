@@ -278,6 +278,7 @@ export const loginHandler = async (req,res)=>{
 }
 export const signupHandler = async (req,res)=>{
     try{
+        console.log(req.body)
         //read all entered inputs
         const {first_name,last_name,email,password} = req.body;
 

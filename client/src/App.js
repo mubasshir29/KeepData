@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import React,{useState} from 'react';
 import './App.css';
 import Navbar from './Components/Navbar';
 import Sidebar from './Components/Sidebar';
@@ -25,8 +26,20 @@ import AddDiag from './Components/AddDiag';
 import LoginPage from './Components/LoginPage';
 import SignupPage from './Components/SignupPage';
 import SignupSuccess from './Components/SignupSuccess'
-
+import { useEffect } from 'react';
+import { checkLoginStatus} from './Utilities/api.js'
+import ProtectedRoute from './Components/ProtectedRoute';
 function App() {
+  const [logged, setLogged] = useState(null)
+
+  const getLoginStatus = async ()=>{
+    const status = await checkLoginStatus()
+    setLogged(status.isLogged)
+  }
+
+  useEffect(()=>{
+    getLoginStatus()
+  },[])
   return (
     <div className='min-w-full min-h-screen bg-slate-900'>
       <Navbar/>
@@ -42,7 +55,7 @@ function App() {
           <Route path='access-points' element={<ShowAccessPoints/>} />
           <Route path='diagrams' element={<ShowDiagrams/>} />
           <Route path='docs' element={<ShowDocs/>} />
-          <Route path='settings' element={<Settings/>} />
+          <Route path='settings' element={<ProtectedRoute logged={logged} ><Settings/></ProtectedRoute>} />
           <Route path='settings/add-branch' element={<AddBranch/>} />
           <Route path='settings/add-internet' element={<AddInternet/>} />
           <Route path='settings/add-firewall' element={<AddFirewall/>} />

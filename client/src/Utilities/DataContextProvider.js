@@ -1,6 +1,6 @@
 import React,{createContext,useEffect,useState} from 'react'
 //import Firewalls from '../Firewalls/Firewalls.jsx'
-import { getAllBranches, getAllInternetDetails, getAllFirewallDetails,getAllWlcDetails,getAllSwitchDetails, getAllAPDetails, getAllSSIDDetails } from './api.js'
+import { getAllBranches, getAllInternetDetails, getAllFirewallDetails,getAllWlcDetails,getAllSwitchDetails, getAllAPDetails, getAllSSIDDetails,checkLoginStatus } from './api.js'
 
 const DataContext = createContext()
 
@@ -12,6 +12,9 @@ function DataContextProvider(props) {
     const [switches, setSwitches] = useState(null)
     const [ssid,setSSID] = useState(null)
     const [ap,setAP] = useState(null)
+
+    const [isLoggedIn, setIsLoggedIn] = useState(null)
+    const [username, setUsername] = useState(null)
 
     const getBranchDetails = async ()=>{
         const result = await getAllBranches()
@@ -49,6 +52,13 @@ function DataContextProvider(props) {
         //console.log("Firewalls",result)
         setSSID(result)
       }
+
+      const userStatus = async ()=>{
+        const status = await checkLoginStatus() //{isLogged: true, user: req.user}
+        setIsLoggedIn(status.isLogged)
+        setUsername(status.user.user_id)
+      }
+
       useEffect(()=>{
         getBranchDetails()
         getConnectionDetails()
@@ -57,10 +67,10 @@ function DataContextProvider(props) {
         getSwitches()
         getAP()
         getSSID()
-        
+        userStatus()
       },[])
   return (
-    <DataContext.Provider value={{branches,connections,firewalls,wlc,switches,ssid,ap}}>
+    <DataContext.Provider value={{branches,connections,firewalls,wlc,switches,ssid,ap,isLoggedIn, username}}>
         {props.children}
     </DataContext.Provider>
   )

@@ -5,6 +5,7 @@ import { RxCrossCircled } from "react-icons/rx";
 import {userSignUp} from './../Utilities/api.js'
 
 function SignupPage() {
+    const [error,setError] = useState("")
     const navigate = useNavigate();
     const defaultSignup = {
         first_name:"",
@@ -23,18 +24,28 @@ function SignupPage() {
     const handleSignupButton = async(e)=>{
         e.preventDefault()
         const response = await userSignUp(newUser)
+        //console.log(newUser)
         if(response){
-            console.log(response)
-            if(response.status === 201)
-                {
-                    navigate('/signupSuccess')
+            console.log("Signup response", response)
+            switch(response.status){
+                case 201: {
+                    navigate('/signupSuccess');
+                    break;
                 }
-        else console.log("There is an error")
+                case 400: {
+                        setError("Username already exist")
+                        break;
+                }
+                default :{
+                    console.log("There is an error");
+                    break
+                }
+            }
     }
 }
     return (
-        <div className='fixed left-0 top-0 w-full h-screen bg-gray-500/70 z-20 flex flex-col items-center justify-center bg-transparent'>
-
+        <div className='fixed left-0 top-0 w-full h-screen bg-gray-900/70 z-20 flex flex-col items-center justify-center bg-transparent'>
+            <div onClick={()=>{navigate(-1)}} className='text-white text-5xl absolute top-5 right-5'><RxCrossCircled/></div>
             <div className='bg-slate-700 w-1/2 rounded-2xl flex flex-col flex-row-reverse items-center justify-between'>
 
                 <div className='flex w-full items-center justify-center gap-6 bg-indigo-500 px-12 py-3 rounded-t-2xl'>
@@ -47,6 +58,7 @@ function SignupPage() {
                 </div>
 
                 <div className='flex-1 flex flex-col w-3/4 items-center p-6 gap-6'>
+                    <p className='text-red-600 text-sm'>{error}</p>
                     <h2 className='text-indigo-500 text-2xl font-bold text-left w-full'>Sign Up</h2>
                         <form className='flex flex-col gap-3 text-base text-white w-full'>
                             <div className='w-full flex gap-2 mx-auto'>
@@ -63,7 +75,7 @@ function SignupPage() {
                             </div>
                             </div>
                             <div className='flex flex-col gap-2 w-full mx-auto'>
-                                <input type='password' name='department' className='p-2 rounded-md bg-slate-800 flex-1 focus:outline-none focus:shadow-lg' placeholder='Department' onChange={e=>valueChange(e)}></input>
+                                <input type='text' name='department' className='p-2 rounded-md bg-slate-800 flex-1 focus:outline-none focus:shadow-lg' placeholder='Department' onChange={e=>valueChange(e)}></input>
                             </div>
                         </form>
                 <button className='bg-indigo-500 w-24 px-3 py-2 rounded-md text-white' onClick={e=>handleSignupButton(e)}>Sign Up</button>

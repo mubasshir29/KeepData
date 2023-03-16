@@ -1,8 +1,35 @@
-import React from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import logo from './../images/Keep_Data_logo_2.png'
-import {NavLink} from 'react-router-dom'
+import {NavLink,useNavigate} from 'react-router-dom'
+import { checkLoginStatus } from '../Utilities/api'
 
 function Navbar() {
+  const [logged, setLogged] = useState(null)
+  const [name,setName] = useState(null)
+
+  const navigate = useNavigate()
+
+  const getLoginStatus = async ()=>{
+    const status = await checkLoginStatus()
+    setLogged(status.isLogged)
+    setName(status.user.user_name)
+  }
+
+  const handleLoginButton = (e)=>{
+    navigate('/login')
+  }
+
+  const handleLogoutButton = (e)=>{
+    localStorage.removeItem("token")
+    setLogged(null)
+    setName(null)
+    navigate('/')
+  }
+
+  useEffect(()=>{
+    getLoginStatus()
+  })
+ 
   return (
     <div className='nav-container w-full bg-slate-800 py-3 h-18 fixed z-10'>
         <div className='nav-bar w-full px-10 mx-auto flex justify-between items-center'>
@@ -11,8 +38,8 @@ function Navbar() {
           </div>
             <div className='nav-list text-white text-lg'>
                 <ul className='flex justify-between gap-6'>
-                    <li className='bg-indigo-500 rounded-2xl py-1 px-4'><NavLink className='focus:outline-none' to='/login'>Login</NavLink></li>
-                    <li className='bg-indigo-500 rounded-2xl py-1 px-4'><NavLink to='/profile' className='focus:outline-none'>Profile</NavLink></li>
+                    <li className='bg-indigo-500 rounded-2xl py-1 px-4'>{logged ? <button className='focus:outline-none' onClick={e=>handleLogoutButton(e)}>Logout</button> : <button className='focus:outline-none' onClick={e=>handleLoginButton(e)}>Login</button>}</li>
+                    <li className='bg-indigo-500 rounded-2xl py-1 px-4'><NavLink to='/profile' className='focus:outline-none'>{name ? name : "Profile"}</NavLink></li>
                 </ul>
             </div>
         </div>
