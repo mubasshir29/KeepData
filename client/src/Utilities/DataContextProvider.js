@@ -56,7 +56,12 @@ function DataContextProvider(props) {
       const userStatus = async ()=>{
         const status = await checkLoginStatus() //{isLogged: true, user: req.user}
         setIsLoggedIn(status.isLogged)
-        setUsername(status.user.user_id)
+        setUsername(status.user.user_name)
+      }
+
+      const setUserOut = ()=>{
+        setIsLoggedIn(false)
+        setUsername(null)
       }
 
       useEffect(()=>{
@@ -70,7 +75,7 @@ function DataContextProvider(props) {
         userStatus()
       },[])
   return (
-    <DataContext.Provider value={{branches,connections,firewalls,wlc,switches,ssid,ap,isLoggedIn, username}}>
+    <DataContext.Provider value={{branches,connections,firewalls,wlc,switches,ssid,ap,isLoggedIn, username,setUserOut}}>
         {props.children}
     </DataContext.Provider>
   )

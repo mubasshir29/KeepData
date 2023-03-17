@@ -2,8 +2,10 @@ import React, { useState, useContext, useEffect } from 'react'
 import logo from './../images/Keep_Data_logo_2.png'
 import {NavLink,useNavigate} from 'react-router-dom'
 import { checkLoginStatus } from '../Utilities/api'
+import {DataContext} from './../Utilities/DataContextProvider.js'
 
 function Navbar() {
+  const {isLoggedIn, username, setUserOut} = useContext(DataContext)
   const [logged, setLogged] = useState(null)
   const [name,setName] = useState(null)
 
@@ -21,8 +23,7 @@ function Navbar() {
 
   const handleLogoutButton = (e)=>{
     localStorage.removeItem("token")
-    setLogged(null)
-    setName(null)
+    setUserOut()
     navigate('/')
   }
 
@@ -38,8 +39,8 @@ function Navbar() {
           </div>
             <div className='nav-list text-white text-lg'>
                 <ul className='flex justify-between gap-6'>
-                    <li className='bg-indigo-500 rounded-2xl py-1 px-4'>{logged ? <button className='focus:outline-none' onClick={e=>handleLogoutButton(e)}>Logout</button> : <button className='focus:outline-none' onClick={e=>handleLoginButton(e)}>Login</button>}</li>
-                    <li className='bg-indigo-500 rounded-2xl py-1 px-4'><NavLink to='/profile' className='focus:outline-none'>{name ? name : "Profile"}</NavLink></li>
+                    <li className='bg-indigo-500 rounded-2xl py-1 px-4'>{isLoggedIn ? <button className='focus:outline-none' onClick={e=>handleLogoutButton(e)}>Logout</button> : <button className='focus:outline-none' onClick={e=>handleLoginButton(e)}>Login</button>}</li>
+                    <li className='bg-indigo-500 rounded-2xl py-1 px-4'><NavLink to='/profile' className='focus:outline-none'>{username ? username : "Profile"}</NavLink></li>
                 </ul>
             </div>
         </div>
