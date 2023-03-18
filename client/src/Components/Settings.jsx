@@ -5,8 +5,12 @@ import { BsFillHouseFill,BsFillShieldLockFill,BsHddNetworkFill,BsFillDiagram3Fil
 import { HiBuildingOffice } from "react-icons/hi2";
 import { MdRouter } from "react-icons/md";
 import AddItemCard from './AddItemCard';
+import { useSelector, useDispatch } from 'react-redux'
+import {setLogin, setLogout} from './../Redux/authSlice.js'
 
 function Settings() {
+  
+
   return (
     <div className='w-full flex flex-col ml-64 mt-20'>
       <div className='cards-container flex gap-8 w-11/12 mx-auto mt-10 flex-wrap justify-center'>

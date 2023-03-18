@@ -3,32 +3,28 @@ import logo from './../images/Keep_Data_logo_2.png'
 import {NavLink,useNavigate} from 'react-router-dom'
 import { checkLoginStatus } from '../Utilities/api'
 import {DataContext} from './../Utilities/DataContextProvider.js'
+import { useSelector, useDispatch } from 'react-redux'
+import {setLogin, setLogout} from './../Redux/authSlice.js'
 
 function Navbar() {
-  const {isLoggedIn, username, setUserOut} = useContext(DataContext)
-  const [logged, setLogged] = useState(null)
-  const [name,setName] = useState(null)
+  const logged = useSelector((state)=>state.loggedStatus)
+  const username = useSelector((state)=>state.username)
+  const dispatch = useDispatch()
 
   const navigate = useNavigate()
-
-  const getLoginStatus = async ()=>{
-    const status = await checkLoginStatus()
-    setLogged(status.isLogged)
-    setName(status.user.user_name)
-  }
 
   const handleLoginButton = (e)=>{
     navigate('/login')
   }
 
   const handleLogoutButton = (e)=>{
+    dispatch(setLogout())
     localStorage.removeItem("token")
-    setUserOut()
     navigate('/')
   }
 
   useEffect(()=>{
-    getLoginStatus()
+
   })
  
   return (
@@ -39,7 +35,7 @@ function Navbar() {
           </div>
             <div className='nav-list text-white text-lg'>
                 <ul className='flex justify-between gap-6'>
-                    <li className='bg-indigo-500 rounded-2xl py-1 px-4'>{isLoggedIn ? <button className='focus:outline-none' onClick={e=>handleLogoutButton(e)}>Logout</button> : <button className='focus:outline-none' onClick={e=>handleLoginButton(e)}>Login</button>}</li>
+                    <li className='bg-indigo-500 rounded-2xl py-1 px-4'>{logged ? <button className='focus:outline-none' onClick={e=>handleLogoutButton(e)}>Logout</button> : <button className='focus:outline-none' onClick={e=>handleLoginButton(e)}>Login</button>}</li>
                     <li className='bg-indigo-500 rounded-2xl py-1 px-4'><NavLink to='/profile' className='focus:outline-none'>{username ? username : "Profile"}</NavLink></li>
                 </ul>
             </div>

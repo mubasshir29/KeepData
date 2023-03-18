@@ -29,16 +29,17 @@ import SignupSuccess from './Components/SignupSuccess'
 import { useEffect } from 'react';
 import { checkLoginStatus} from './Utilities/api.js'
 import ProtectedRoute from './Components/ProtectedRoute';
-function App() {
-  const [logged, setLogged] = useState(null)
+import { useSelector, useDispatch } from 'react-redux'
+import {setLogin, setLogout} from './Redux/authSlice.js'
 
-  const getLoginStatus = async ()=>{
-    const status = await checkLoginStatus()
-    setLogged(status.isLogged)
-  }
+
+function App() {
+  
+  const logged = useSelector((state)=>state.loggedStatus)
+  const username = useSelector((state)=>state.username)
 
   useEffect(()=>{
-    getLoginStatus()
+    
   },[])
   return (
     <div className='min-w-full min-h-screen bg-slate-900'>

@@ -4,10 +4,18 @@ import Logo from './../images/Keep_Data_logo_white.png'
 import { RxCrossCircled } from "react-icons/rx";
 import { useNavigate } from 'react-router-dom';
 import {userLogin} from './../Utilities/api.js'
+import { useSelector, useDispatch } from 'react-redux';
+import {setLogin, setLogout} from './../Redux/authSlice.js'
 
 
 function LoginPage() {
     const navigate = useNavigate();
+    const logged = useSelector((state)=>state.loggedStatus)
+    const username = useSelector((state)=>state.username)
+    const dispatch = useDispatch()
+
+    console.log("Logged:",logged)
+    console.log("username:",username)
     const defaultLogin = {
         email:"",
         password: ""
@@ -27,6 +35,7 @@ function LoginPage() {
             if(response.status === 200)
                 {
                     localStorage.setItem("token", response.data.token)
+                    dispatch(setLogin(response.data.first_name))
                     navigate(-1)
                 }
         else console.log("There is an error")
