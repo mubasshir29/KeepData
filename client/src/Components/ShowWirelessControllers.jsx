@@ -1,8 +1,11 @@
 import React, { useContext } from 'react'
 import {DataContext} from './../Utilities/DataContextProvider'
 import WirelessCard from './WirelessCard'
+import { useSelector, useDispatch } from 'react-redux'
 
 function ShowWirelessControllers() {
+  const logged = useSelector((state)=>state.auth.loggedStatus)
+
   const {wlc,ssid,branches} = useContext(DataContext)
   let branchHasWLC = []
   if(wlc){
@@ -37,7 +40,7 @@ function ShowWirelessControllers() {
               <h2 className='text-2xl font-bold'>{(branches.find(e => e.branch_code == branch)).name}</h2>
               <h3 className='text-lg font-bold'>Wireless Controllers</h3>
               <table className='text-center w-full'>
-                <tr className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>
+                <tr className='bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-lg'>
                   <th>Location</th>
                   <th>Name</th>
                   <th>Model</th>
@@ -78,7 +81,7 @@ function ShowWirelessControllers() {
                   <td>{id.branch}</td>
                   <td>{id.controller}</td>
                   <td>{id.ssid}</td>
-                  <td>{id.password}</td>
+                  <td>{logged ? id.password : "*******"}</td>
                   <td>{id.description}</td>
                 </tr>)
               }
