@@ -13,6 +13,7 @@ import ShowWirelessControllers from './Components/ShowWirelessControllers'
 import ShowAccessPoints from './Components/ShowAccessPoints'
 import ShowDiagrams from './Components/ShowDiagrams'
 import ShowDocs from './Components/ShowDocs'
+import ShowSSID from './Components/ShowSSID';
 import Settings from './Components/Settings'
 import Branches from './Components/Branches'
 import AddBranch from './Components/AddBranch';
@@ -52,6 +53,7 @@ function App() {
           <Route path='internet' element={<ShowInternet/>} />
           <Route path='firewall' element={<ShowFirewalls/>} />
           <Route path='wireless' element={<ShowWirelessControllers/>} />
+          <Route path='ssid' element={<ShowSSID/>} />
           <Route path='switches' element={<ShowSwitches/>} />
           <Route path='access-points' element={<ShowAccessPoints/>} />
           <Route path='diagrams' element={<ShowDiagrams/>} />

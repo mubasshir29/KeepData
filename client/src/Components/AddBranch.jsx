@@ -14,7 +14,7 @@ function AddBranch() {
                 <FormInputField values={{label_text:"Address"}} />
             </form>
         </div>
-        <button className='bg-indigo-500 flex-grow-0 w-20 mx-auto mt-6 px-6 py-2 rounded-md  text-lg text-white'>Save</button>
+        <button className='bg-indigo-500 flex-grow-0 w-30 mx-auto mt-6 px-12 py-2 rounded-md  text-lg text-white'>Save</button>
     </div>
   )
 }

@@ -10,9 +10,9 @@ function AddSwitch() {
         <div className='form-container w-1/2 bg-gradient-to-r from-slate-600 to-slate-700 mx-auto px-10 py-10 mt-6 rounded-xl'>
             <form className='flex flex-col flex-nowrap gap-6 items-stretch'>
                 
-                <div className='text-slate-300 flex-1 flex gap-3'>
-                    <label className='text-lg'>Branch</label>
-                    <select className='bg-slate-900 flex-1  rounded-md py-1 px-2 text-lg focus:outline-none'>
+                <div className='text-slate-300 flex-1 flex gap-3 bg-slate-900 rounded-lg'>
+                    <label className='text-lg rounded-l-lg bg-slate-800 m-0 py-2 px-4'>Branch</label>
+                    <select className=' flex-1 bg-slate-900  rounded-md py-1 px-2 text-lg focus:outline-none'>
                       <option className='w-full text-center'>--Select Branch--</option>
                       {branches && branches.map(branch => <option>{branch.name}</option>)}
                     </select>
@@ -26,7 +26,7 @@ function AddSwitch() {
                 
             </form>
         </div>
-        <button className='bg-indigo-500 flex-grow-0 w-20 mx-auto mt-6 px-6 py-2 rounded-md  text-lg text-white'>Save</button>
+        <button className='bg-indigo-500 flex-grow-0 w-30 mx-auto mt-6 px-12 py-2 rounded-md  text-lg text-white'>Save</button>
     </div>
   )
 }

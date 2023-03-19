@@ -53,17 +53,6 @@ function DataContextProvider(props) {
         setSSID(result)
       }
 
-      const userStatus = async ()=>{
-        const status = await checkLoginStatus() //{isLogged: true, user: req.user}
-        setIsLoggedIn(status.isLogged)
-        setUsername(status.user.user_name)
-      }
-
-      const setUserOut = ()=>{
-        setIsLoggedIn(false)
-        setUsername(null)
-      }
-
       useEffect(()=>{
         getBranchDetails()
         getConnectionDetails()
@@ -72,10 +61,9 @@ function DataContextProvider(props) {
         getSwitches()
         getAP()
         getSSID()
-        userStatus()
       },[])
   return (
-    <DataContext.Provider value={{branches,connections,firewalls,wlc,switches,ssid,ap,isLoggedIn, username,setUserOut}}>
+    <DataContext.Provider value={{branches,connections,firewalls,wlc,switches,ssid,ap}}>
         {props.children}
     </DataContext.Provider>
   )

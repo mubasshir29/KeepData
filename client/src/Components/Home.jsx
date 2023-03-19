@@ -1,7 +1,9 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom';
 import { FaAmazon, FaHome, FaInternetExplorer,FaWifi } from "react-icons/fa";
 import { BsFillHouseFill,BsFillShieldLockFill,BsHddNetworkFill,BsFillDiagram3Fill } from "react-icons/bs";
 import { HiBuildingOffice } from "react-icons/hi2";
+import { VscServerProcess } from "react-icons/vsc";
 import { MdRouter,MdSettings } from "react-icons/md";
 import DashboardCard from './DashboardCard';
 function Home() {
@@ -13,29 +15,48 @@ function Home() {
           <h2 className='text-xl font-bold'><span className='text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500'>Dashboard</span></h2>
           <div className='dashboard-cards flex flex-wrap gap-8 justify-center'>
 
+            <NavLink to='/branches'>
             <DashboardCard details={{title:"Branches",value:"6"}}>
               <HiBuildingOffice/>
             </DashboardCard>
+            </NavLink>
 
+            <NavLink to='/internet'>
             <DashboardCard details={{title:"Internet",value:"17"}}>
               <FaInternetExplorer/>
             </DashboardCard>
+            </NavLink>
 
+            <NavLink to='/firewall'>
             <DashboardCard details={{title:"Firewalls",value:"8"}}>
               <BsFillShieldLockFill/>
             </DashboardCard>
+            </NavLink>
 
+            <NavLink to='/switches'>
             <DashboardCard details={{title:"Switches",value:"10"}}>
               <BsHddNetworkFill/>
             </DashboardCard>
+            </NavLink>
 
-            <DashboardCard details={{title:"Wireless",value:"100"}}>
+            <NavLink to='/wireless'>
+            <DashboardCard details={{title:"WLC",value:"4"}}>
+              <VscServerProcess/>
+            </DashboardCard>
+            </NavLink>
+
+            {/* <NavLink to='/branches'>
+            <DashboardCard details={{title:"SSID",value:"24"}}>
               <FaWifi/>
             </DashboardCard>
+            </NavLink> */}
 
+            <NavLink to='/access-points'>
             <DashboardCard details={{title:"Access Points",value:"100"}}>
               <MdRouter/>
             </DashboardCard>
+            </NavLink>
+
 
           </div>
         </div>
