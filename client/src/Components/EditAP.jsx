@@ -1,13 +1,13 @@
 import React,{useContext, useState} from 'react'
 import FormInputField from './FormInputField'
-import {DataContext} from './../Utilities/DataContextProvider'
+import {DataContext} from '../Utilities/DataContextProvider'
 
-function AddAP() {
+function EditAP() {
   const {branches,wlc} = useContext(DataContext)
   const [selectedBranch, setSelectedBranch] = useState()
   return (
     <div className='w-full flex flex-col ml-64 mt-20'>
-        <h1 className='text-3xl font-bold mx-auto mt-6 text-indigo-500'>Add AP</h1>
+        <h1 className='text-3xl font-bold mx-auto mt-6 text-indigo-500'>Edit AP</h1>
         <div className='form-container w-1/2 bg-gradient-to-r from-slate-600 to-slate-700 mx-auto px-10 py-10 mt-6 rounded-xl'>
             <form className='flex flex-col flex-nowrap gap-6 items-stretch'>
               
@@ -39,4 +39,4 @@ function AddAP() {
   )
 }
 
-export default AddAP
+export default EditAP

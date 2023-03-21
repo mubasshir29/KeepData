@@ -7,6 +7,7 @@ import { MdRouter } from "react-icons/md";
 import AddItemCard from './AddItemCard';
 import { useSelector, useDispatch } from 'react-redux'
 import {setLogin, setLogout} from './../Redux/authSlice.js'
+import { IoMdWifi } from "react-icons/io";
 
 function Settings() {
   
@@ -33,6 +34,10 @@ function Settings() {
 
         <AddItemCard values={{card_title:"Add WLC",card_text:"Add a new WLC", nav_link:"add-wlc"}}>
           <FaWifi/>
+        </AddItemCard>
+
+        <AddItemCard values={{card_title:"Add SSID",card_text:"Add a new SSID", nav_link:"add-ssid"}}>
+          <IoMdWifi/>
         </AddItemCard>
 
         <AddItemCard values={{card_title:"Add Access Point",card_text:"Add a new AP", nav_link:"add-ap"}}>

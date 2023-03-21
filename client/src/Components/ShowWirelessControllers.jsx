@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { FaRegEdit } from "react-icons/fa";
 import { CSVLink } from "react-csv";
 import { VscExport } from "react-icons/vsc";
+import { NavLink } from 'react-router-dom';
 
 
 function ShowWirelessControllers() {
@@ -81,7 +82,7 @@ function ShowWirelessControllers() {
                       <td className='py-1'>{controller.management_ip}</td>
                       <td className='py-1'>{controller.software}</td>
                       <td className='py-1'>{controller.support}</td>
-                      <div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div>
+                      <NavLink to={`/edit-wlc/${controller._id}`}><div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
                     </tr>)
                   }
                   })

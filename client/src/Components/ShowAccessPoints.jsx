@@ -3,6 +3,7 @@ import {DataContext} from './../Utilities/DataContextProvider'
 import { FaRegEdit,FaFileExport } from "react-icons/fa";
 import { CSVLink , CSVDownload } from "react-csv";
 import { VscExport } from "react-icons/vsc";
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -74,7 +75,7 @@ function ShowAccessPoints() {
                     <td className='p-2'>{router.management_ip}</td>
                     <td className='p-2'>{router.mac_address}</td>
                     <td className='p-2'>{router.description}</td>
-                    <div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div>
+                    <NavLink to={`/edit-ap/${router._id}`}><div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
                   </tr>
                 )
               }

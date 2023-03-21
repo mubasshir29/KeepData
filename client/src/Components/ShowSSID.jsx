@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { FaRegEdit } from "react-icons/fa";
 import { CSVLink } from "react-csv";
 import { VscExport } from "react-icons/vsc";
+import { NavLink } from 'react-router-dom';
 
 function ShowSSID() {
     const {ssid,branches} = useContext(DataContext)
@@ -21,7 +22,7 @@ function ShowSSID() {
             }
         })
     }
-    console.log(branchHasSSID)
+    //console.log(branchHasSSID)
     let ssidData =[]
     let file=''
 
@@ -47,18 +48,19 @@ function ShowSSID() {
               <th className='py-1'>Password</th>
               <th className='py-1'>Description</th>
             </tr>
-            {ssid && ssid.map(id=>{
+            {ssid && ssid.map(wifi=>{
               
-              if(id.branch == branch){
-                ssidData.push(id)
-                file = id.branch
+              if(wifi.branch == branch){
+                ssidData.push(wifi)
+                console.log(wifi)
+                file = wifi.branch
                 return(<tr className='bg-slate-700 text-sm hover:text-indigo-300 hover:cursor-pointer odd:bg-slate-800 relative group'>
-                  <td className='p-1'>{id.branch}</td>
-                  <td className='p-1'>{id.controller}</td>
-                  <td className='p-1'>{id.ssid}</td>
-                  <td className='p-1'>{logged ? id.password : "*******"}</td>
-                  <td className='p-1'>{id.description}</td>
-                  <div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div>
+                  <td className='p-1'>{wifi.branch}</td>
+                  <td className='p-1'>{wifi.controller}</td>
+                  <td className='p-1'>{wifi.ssid}</td>
+                  <td className='p-1'>{logged ? wifi.password : "*******"}</td>
+                  <td className='p-1'>{wifi.description}</td>
+                  <NavLink to={`/edit-wlc/${wifi._id}`}><div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
                 </tr>) 
               }
             })}

@@ -1,10 +1,11 @@
 import React from 'react'
 import { FaRegEdit } from "react-icons/fa";
+import { NavLink } from 'react-router-dom';
 
 function SwitchCard({device}) {
   return (
     <div className='bg-slate-700 w-[540px] rounded-xl relative group'>
-        <div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div>
+        <NavLink to={`/edit-switch/${device._id}`}><div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
         <table className='w-full mx-auto text-left'>
             <tr>
                 <th className='pl-8 pt-3 pb-1 bg-indigo-500 rounded-tl-xl font-semibold'>Branch</th>

@@ -34,6 +34,11 @@ import { useSelector, useDispatch } from 'react-redux'
 import {setLogin, setLogout} from './Redux/authSlice.js'
 import EditBranch from './Components/EditBranch';
 import EditInternet from './Components/EditInternet'
+import EditFirewall from './Components/EditFirewall';
+import EditSwitch from './Components/EditSwitch';
+import EditWLC from './Components/EditWLC';
+import EditSSID from './Components/EditSSID';
+import EditAP from './Components/EditAP';
 
 function App() {
   
@@ -61,6 +66,11 @@ function App() {
           <Route path='docs' element={<ShowDocs/>} />
           <Route exact path='/edit-branch/:id' element={<EditBranch/>} />
           <Route exact path='/edit-internet/:id' element={<EditInternet/>} />
+          <Route exact path='/edit-firewall/:id' element={<EditFirewall/>} />
+          <Route exact path='/edit-switch/:id' element={<EditSwitch/>} />
+          <Route exact path='/edit-wlc/:id' element={<EditWLC/>} />
+          <Route exact path='/edit-ssid/:id' element={<EditSSID/>} />
+          <Route exact path='/edit-ap/:id' element={<EditAP/>} />
           <Route path='settings' element={<ProtectedRoute logged={logged} ><Settings/></ProtectedRoute>} />
           <Route path='settings/add-branch' element={<AddBranch/>} />
           <Route path='settings/add-internet' element={<AddInternet/>} />
