@@ -53,9 +53,10 @@ export const updateBranch = async (req,res)=>{
     try{
         const updated = await branchModel.findByIdAndUpdate(req.body._id, req.body)
         console.log("Branch updated successfully", updated)
+        res.status(200).json({"msg":"Branch updated Successfully"})
     }
     catch(e){
-
+        res.status(400).json({"msg": "Update failed"})
     }
 }
 

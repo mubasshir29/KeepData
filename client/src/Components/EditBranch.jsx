@@ -1,21 +1,15 @@
 import React,{useEffect, useState} from 'react'
 import FormInputField from './FormInputField'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import {getBranch,updateBranch} from './../Utilities/api.js'
 
 
 
 function EditBranch() {
+  const navigate = useNavigate()
   const [branch,setBranch] = useState()
   const {id} = useParams()
 
-  // const initialValues = {
-  //   name:"",
-  //   branch_code: "",
-  //   location:"",
-  //   contact: ""
-  // }
-  
   const [updatedBranch, setUpdatedBranch] = useState()
   const gettingBranch = async ()=>{
     const data = await getBranch(id)
@@ -35,6 +29,11 @@ function EditBranch() {
   const handleSaveButton = async ()=>{
     const response = await updateBranch(updatedBranch)
     //console.log(updatedBranch)
+    if(response.status === 200){
+      console.log("Updated Successfully")
+      navigate("/branches")
+    }
+    else console.log("Updated failed")
   }
   
   if(branch){

@@ -1,6 +1,7 @@
 import axios from 'axios'
 const server = "http://localhost:9500"
 
+//Add Branch
 export const addBranch = async (branch)=>{
     console.log("From API",branch)
     try{
@@ -12,6 +13,7 @@ export const addBranch = async (branch)=>{
     }
 }
 
+//Gettign a branch details
 export const getBranch = async (id)=>{
     try{
         const data = await axios.get(`${server}/branch/${id}`)
@@ -23,6 +25,7 @@ export const getBranch = async (id)=>{
     }
 }
 
+//Getting all branches details
 export const getAllBranches = async ()=>{
     try{
         const response = await axios.get(`${server}/branch`)
@@ -34,19 +37,20 @@ export const getAllBranches = async ()=>{
     }
 }
 
+//updating a branch
 export const updateBranch = async (branch)=>{
     console.log("From API",branch)
 
     try{
-        await axios.post(`${server}/edit/branch`,branch)
-        //console.log("Data sent")
+        const response = await axios.post(`${server}/edit/branch`,branch)
+        return response
     }
     catch(error){
         console.log("Error in sending data",error)
     }
 }
 
-
+//Adding Internet Connection
 export const addInternetConnection = async (connection)=>{
     try{
         const response = await axios.post(`${server}/new/internet`,connection)
@@ -59,6 +63,7 @@ export const addInternetConnection = async (connection)=>{
     }
 }
 
+//Getting Internet Connection Details
 export const getInternetDetails = async (id)=>{
     try{
         const response = await axios.get(`${server}/internet/${id}`)
@@ -70,6 +75,8 @@ export const getInternetDetails = async (id)=>{
         console.log("Error in getting data",error)
     }
 }
+
+//Getting All Internet Details
 export const getAllInternetDetails = async ()=>{
     try{
         const response = await axios.get(`${server}/internet`)
@@ -82,6 +89,7 @@ export const getAllInternetDetails = async ()=>{
     }
 }
 
+//Adding A Firewall
 export const addFirewall = async (newFirewall)=>{
     //console.log(newFirewall)
     try{
@@ -94,6 +102,8 @@ export const addFirewall = async (newFirewall)=>{
         console.log("Error in getting data",error)
     }
 }
+
+//Getting a firewall details
 export const getFirewallDetails = async (id)=>{
     try{
         const response = await axios.get(`${server}/firewall/${id}`)
@@ -105,6 +115,8 @@ export const getFirewallDetails = async (id)=>{
         console.log("Error in getting data",error)
     }
 }
+
+//Getting all firewall details
 export const getAllFirewallDetails = async ()=>{
     try{
         const response = await axios.get(`${server}/firewall`)
@@ -117,6 +129,7 @@ export const getAllFirewallDetails = async ()=>{
     }
 }
 
+//Adding a switch
 export const addSwitch = async (newSwitch)=>{
     //console.log(newSwitch)
     try{
@@ -130,6 +143,7 @@ export const addSwitch = async (newSwitch)=>{
     }
 }
 
+//Gettinga a switch details
 export const getSwitchDetails = async (id)=>{
     try{
         const response = await axios.get(`${server}/switch/${id}`)
@@ -141,6 +155,8 @@ export const getSwitchDetails = async (id)=>{
         console.log("Error in getting data",error)
     }
 }
+
+//Getting all switch details
 export const getAllSwitchDetails = async ()=>{
     try{
         const response = await axios.get(`${server}/switch`)
@@ -153,7 +169,7 @@ export const getAllSwitchDetails = async ()=>{
     }
 }
 
-
+//Adding a wireless Controller
 export const addWLC = async (newWLC)=>{
     //console.log(newWLC)
     try{
@@ -166,6 +182,8 @@ export const addWLC = async (newWLC)=>{
         console.log("Error in getting data",error)
     }
 }
+
+//Getting a wlc details
 export const getWlcDetails = async (id)=>{
     try{
         const response = await axios.get(`${server}/wlc/${id}`)
@@ -177,6 +195,8 @@ export const getWlcDetails = async (id)=>{
         console.log("Error in getting data",error)
     }
 }
+
+//Getting all wlc details
 export const getAllWlcDetails = async ()=>{
     try{
         const response = await axios.get(`${server}/wlc`)
@@ -188,6 +208,8 @@ export const getAllWlcDetails = async ()=>{
         console.log("Error in getting data",error)
     }
 }
+
+//Adding an AP
 export const addAP = async (newAP)=>{
     //console.log(newAP)
     try{
@@ -200,6 +222,8 @@ export const addAP = async (newAP)=>{
         console.log("Error in getting data",error)
     }
 }
+
+//Getting an AP details
 export const getAPDetails = async (id)=>{
     try{
         const response = await axios.get(`${server}/ap/${id}`)
@@ -211,6 +235,8 @@ export const getAPDetails = async (id)=>{
         console.log("Error in getting data",error)
     }
 }
+
+//Getting all AP details
 export const getAllAPDetails = async ()=>{
     try{
         const response = await axios.get(`${server}/ap`)
@@ -223,6 +249,7 @@ export const getAllAPDetails = async ()=>{
     }
 }
 
+//Adding an SSID
 export const addSSID = async (newSSID)=>{
     //console.log(newSSID)
     try{
@@ -235,6 +262,8 @@ export const addSSID = async (newSSID)=>{
         console.log("Error in getting data",error)
     }
 }
+
+//Getting an SSID details 
 export const getSSIDDetails = async (id)=>{
     try{
         const response = await axios.get(`${server}/ssid/${id}`)
@@ -246,6 +275,8 @@ export const getSSIDDetails = async (id)=>{
         console.log("Error in getting data",error)
     }
 }
+
+//Getting all SSID details
 export const getAllSSIDDetails = async ()=>{
     try{
         const response = await axios.get(`${server}/ssid`)
@@ -258,6 +289,7 @@ export const getAllSSIDDetails = async ()=>{
     }
 }
 
+//User Signup
 export const userSignUp = async (user_data) =>{
     //console.log(user_data)
     let signupResponse;
@@ -272,6 +304,7 @@ export const userSignUp = async (user_data) =>{
     }
 }
 
+//User Login
 export const userLogin = async (user_data) =>{
     try{
         const lgoinResponse = await axios.post(`${server}/login`, user_data)
@@ -283,6 +316,7 @@ export const userLogin = async (user_data) =>{
     }
 }
 
+//Check Login status
 export const checkLoginStatus = async ()=>{
     try{
         const loginStatus = await axios.get(`${server}/isAuthenticated`,{
