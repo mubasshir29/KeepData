@@ -1,5 +1,5 @@
 import express from 'express'
-import {getHomeData, addBranch,getBranchDetails,addInternetConnection,getInternetDetails,getFirewallDetails,addFirewall,getSwitchDetails,addSwitch,addWLC,getWLCDetails,addAP,getAPDetails,addSSID,getSSIDDetails,signupHandler,loginHandler,checkAuthentication,updateBranch} from './../Controllers/pageController.js'
+import {getHomeData, addBranch,getBranchDetails,addInternetConnection,getInternetDetails,getFirewallDetails,addFirewall,getSwitchDetails,addSwitch,addWLC,getWLCDetails,addAP,getAPDetails,addSSID,getSSIDDetails,signupHandler,loginHandler,checkAuthentication,updateBranch,updateInternetConnection} from './../Controllers/pageController.js'
 const pageRouter = express.Router()
 import verifyToken from './../Middleware/verifyToken.js'
 
@@ -12,6 +12,8 @@ pageRouter.post('/edit/branch',updateBranch)
 pageRouter.get('/internet',getInternetDetails)
 pageRouter.get('/internet/:id',getInternetDetails)
 pageRouter.post('/new/internet',addInternetConnection)
+pageRouter.post('/edit/internet',updateInternetConnection)
+
 
 pageRouter.get('/firewall',getFirewallDetails)
 pageRouter.get('/firewall/:id',getFirewallDetails)

@@ -75,18 +75,31 @@ export const addInternetConnection = async (req,res)=>{
 }
 export const getInternetDetails = async (req,res)=>{
     console.log("Request for internet details")
+    console.log(req.params.id)
     try{
         if(req.params.id){
-            const id = req.params.id
-            const connection = internetConnectionModel.findOne({branch_code:id})
-            res.status(200).json(connection)
+            const foundInternet = await internetConnectionModel.findOne({_id:req.params.id})
+            console.log(foundInternet)
+            res.status(200).json(foundInternet)
         }
         else{
-            const connections = await internetConnectionModel.find()
+            const foundInternet = await internetConnectionModel.find()
             // console.log("Request received at backend")
             // console.log(connections)
-            res.status(200).json(connections)
+            res.status(200).json(foundInternet)
         }
+    }
+    catch(error){
+        console.log("Error:",error)
+    }
+}
+export const updateInternetConnection = async (req,res)=>{
+    console.log("Data received at backend")
+    console.log(req.body)
+    try{
+        const updateConnection = await internetConnectionModel.findByIdAndUpdate(req.body._id, req.body)
+        console.log("Connection updated Successfully")
+        res.status(200).json(updateConnection)
     }
     catch(error){
         console.log("Error:",error)

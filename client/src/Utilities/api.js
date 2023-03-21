@@ -65,6 +65,7 @@ export const addInternetConnection = async (connection)=>{
 
 //Getting Internet Connection Details
 export const getInternetDetails = async (id)=>{
+    console.log("From API",id)
     try{
         const response = await axios.get(`${server}/internet/${id}`)
         // console.log("Getting internet details from backend")
@@ -83,6 +84,17 @@ export const getAllInternetDetails = async ()=>{
         // console.log("Getting internet details from backend")
         // console.log("Internet Data received", response.data)
         return response.data
+    }
+    catch(error){
+        console.log("Error in getting data",error)
+    }
+}
+export const updateInternetConnection = async (connection)=>{
+    try{
+        const response = await axios.post(`${server}/edit/internet`,connection)
+        console.log("Response received", response.status)
+        console.log("In API",response.data)
+        return response;
     }
     catch(error){
         console.log("Error in getting data",error)

@@ -33,7 +33,7 @@ import ProtectedRoute from './Components/ProtectedRoute';
 import { useSelector, useDispatch } from 'react-redux'
 import {setLogin, setLogout} from './Redux/authSlice.js'
 import EditBranch from './Components/EditBranch';
-
+import EditInternet from './Components/EditInternet'
 
 function App() {
   
@@ -60,6 +60,7 @@ function App() {
           <Route path='diagrams' element={<ShowDiagrams/>} />
           <Route path='docs' element={<ShowDocs/>} />
           <Route exact path='/edit-branch/:id' element={<EditBranch/>} />
+          <Route exact path='/edit-internet/:id' element={<EditInternet/>} />
           <Route path='settings' element={<ProtectedRoute logged={logged} ><Settings/></ProtectedRoute>} />
           <Route path='settings/add-branch' element={<AddBranch/>} />
           <Route path='settings/add-internet' element={<AddInternet/>} />
