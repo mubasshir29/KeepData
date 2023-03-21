@@ -32,6 +32,7 @@ import { checkLoginStatus} from './Utilities/api.js'
 import ProtectedRoute from './Components/ProtectedRoute';
 import { useSelector, useDispatch } from 'react-redux'
 import {setLogin, setLogout} from './Redux/authSlice.js'
+import EditBranch from './Components/EditBranch';
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
           <Route path='access-points' element={<ShowAccessPoints/>} />
           <Route path='diagrams' element={<ShowDiagrams/>} />
           <Route path='docs' element={<ShowDocs/>} />
+          <Route exact path='/edit-branch/:id' element={<EditBranch/>} />
           <Route path='settings' element={<ProtectedRoute logged={logged} ><Settings/></ProtectedRoute>} />
           <Route path='settings/add-branch' element={<AddBranch/>} />
           <Route path='settings/add-internet' element={<AddInternet/>} />
@@ -67,6 +69,7 @@ function App() {
           <Route path='settings/add-ssid' element={<AddSSID/>} />
           <Route path='settings/add-ap' element={<AddAP/>} />
           <Route path='settings/add-diag' element={<AddDiag/>} />
+          
           <Route path='/login' element={<LoginPage/>} />
           <Route path='/signup' element={<SignupPage/>} />
           <Route path='/signupSuccess' element={<SignupSuccess/>} />

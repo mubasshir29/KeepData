@@ -32,18 +32,30 @@ export const getBranchDetails = async (req,res)=>{
     try{
         if(req.params.id){
             const id = req.params.id
-            const branch = branchModel.findOne({branch_code:id})
-            res.status(200).json(branch)
+            console.log("ID",id)
+            const foundBranch = await branchModel.findOne({_id:id})
+            res.status(200).json(foundBranch)
+            console.log(foundBranch)
         }
         else{
-            const branches = await branchModel.find()
+            const foundBranch = await branchModel.find()
             // console.log("Request received at backend")
             // console.log(branches)
-            res.status(200).json(branches)
+            res.status(200).json(foundBranch)
         }
     }
     catch(error){
         console.log("Error:",error)
+    }
+}
+
+export const updateBranch = async (req,res)=>{
+    try{
+        const updated = await branchModel.findByIdAndUpdate(req.body._id, req.body)
+        console.log("Branch updated successfully", updated)
+    }
+    catch(e){
+
     }
 }
 

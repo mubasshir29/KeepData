@@ -1,5 +1,5 @@
 import axios from 'axios'
-const server = "http://localhost:9000"
+const server = "http://localhost:9500"
 
 export const addBranch = async (branch)=>{
     console.log("From API",branch)
@@ -15,7 +15,8 @@ export const addBranch = async (branch)=>{
 export const getBranch = async (id)=>{
     try{
         const data = await axios.get(`${server}/branch/${id}`)
-        //console.log("Data received", data)
+        console.log("Data received", data)
+        return data.data
     }
     catch(error){
         console.log("Error in getting data",error)
@@ -32,6 +33,19 @@ export const getAllBranches = async ()=>{
         console.log("Error in getting data",error)
     }
 }
+
+export const updateBranch = async (branch)=>{
+    console.log("From API",branch)
+
+    try{
+        await axios.post(`${server}/edit/branch`,branch)
+        //console.log("Data sent")
+    }
+    catch(error){
+        console.log("Error in sending data",error)
+    }
+}
+
 
 export const addInternetConnection = async (connection)=>{
     try{

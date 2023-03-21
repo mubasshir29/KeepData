@@ -63,7 +63,7 @@ function ShowSSID() {
               }
             })}
           </table>
-            <div className='flex w-full justify-between mb-3'>
+            <div className='flex w-full gap-3 mb-3'>
                 <h2 className='text-2xl font-bold'>{(branches.find(e => e.branch_code == branch)).name}</h2>
                 <div className='bg-slate-700 flex-grow-0 flex items-center py-0.5 px-4 rounded-full '><CSVLink  data={ssidData} headers={ssidHeaders} filename={`${file}_ssids.csv`} className='flex gap-2 items-center'>Export <VscExport/></CSVLink ></div>
             </div>

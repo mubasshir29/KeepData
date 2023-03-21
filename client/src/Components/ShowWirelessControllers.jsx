@@ -87,7 +87,7 @@ function ShowWirelessControllers() {
                   })
                 }
             </table>
-            <div className='w-full flex justify-between '>
+            <div className='w-full flex gap-3'>
               <h2 className='text-2xl font-bold'>{(branches.find(e => e.branch_code == branch)).name}</h2>
               <div className='bg-slate-700 flex-grow-0 flex items-center py-0.5 px-4 rounded-full '><CSVLink  data={wlcData} headers={wlcHeaders} filename={`${file}_wlc.csv`} className='flex gap-2 items-center'>Export <VscExport/></CSVLink ></div>
               </div>
