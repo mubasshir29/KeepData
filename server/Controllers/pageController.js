@@ -14,6 +14,7 @@ export const getHomeData = (req,res)=>{
     
 }
 
+//Adding a branch CREATE operation
 export const addBranch = async (req,res)=>{
     //console.log("Data received at backend")
     //console.log(req.body)
@@ -28,6 +29,7 @@ export const addBranch = async (req,res)=>{
     }
 }
 
+//Getting branch details READ
 export const getBranchDetails = async (req,res)=>{
     try{
         if(req.params.id){
@@ -48,7 +50,7 @@ export const getBranchDetails = async (req,res)=>{
         console.log("Error:",error)
     }
 }
-
+//Update a branch UPDATE operation
 export const updateBranch = async (req,res)=>{
     try{
         const updated = await branchModel.findByIdAndUpdate(req.body._id, req.body)
@@ -60,6 +62,19 @@ export const updateBranch = async (req,res)=>{
     }
 }
 
+//Update a branch DELETE operation
+export const deleteBranch = async (req,res)=>{
+    try{
+        const deleted = await branchModel.findByIdAndDelete(req.body._id)
+        console.log("Branch deleted successfully", deleted)
+        res.status(200).json({"msg":"Branch deleted Successfully"})
+    }
+    catch(e){
+        res.status(400).json({"msg": "Delete failed"})
+    }
+}
+
+//Add internet connection CREATE
 export const addInternetConnection = async (req,res)=>{
     console.log("Data received at backend")
     console.log(req.body)
@@ -73,6 +88,8 @@ export const addInternetConnection = async (req,res)=>{
         console.log("Error:",error)
     }
 }
+
+//Getting Internet details READ
 export const getInternetDetails = async (req,res)=>{
     console.log("Request for internet details")
     console.log(req.params.id)
@@ -93,19 +110,34 @@ export const getInternetDetails = async (req,res)=>{
         console.log("Error:",error)
     }
 }
+//Update internet connection UPDATE
 export const updateInternetConnection = async (req,res)=>{
     console.log("Data received at backend")
     console.log(req.body)
     try{
-        const updateConnection = await internetConnectionModel.findByIdAndUpdate(req.body._id, req.body)
+        const updated = await internetConnectionModel.findByIdAndUpdate(req.body._id, req.body)
         console.log("Connection updated Successfully")
-        res.status(200).json(updateConnection)
+        res.status(200).json(updated)
     }
     catch(error){
-        console.log("Error:",error)
+        res.status(400).json({"msg": "Update failed"})
+    }
+}
+//Delete internet connection DELETE
+export const deleteInternetConnection = async (req,res)=>{
+    console.log("Data received at backend")
+    console.log(req.body)
+    try{
+        const deleted = await internetConnectionModel.findByIdAndDelete(req.body._id)
+        console.log("Connection deleted Successfully")
+        res.status(200).json(deleted)
+    }
+    catch(error){
+        res.status(400).json({"msg": "Delete failed"})
     }
 }
 
+//Adding a firewall CREATE
 export const addFirewall = async (req,res)=>{
     //console.log("Data received at backend")
     //console.log(req.body)
@@ -119,6 +151,7 @@ export const addFirewall = async (req,res)=>{
         console.log("Error:",error)
     }
 }
+//Getting firewall info READ
 export const getFirewallDetails = async (req,res)=>{
     //console.log("Request for Firewall details")
     try{
@@ -138,7 +171,37 @@ export const getFirewallDetails = async (req,res)=>{
         console.log("Error:",error)
     }
 }
+//Update a firewall UPDATE
+export const updateFirewall = async (req,res)=>{
+    //console.log("Data received at backend")
+    //console.log(req.body)
+    try{
+        const updated = await firewallModel.findByIdAndUpdate(req.body._id, req.body)
+        
+        console.log("Firewall updated Successfully")
+        res.status(200).json(updated)
+    }
+    catch(error){
+        res.status(400).json({"msg": "Update failed"})
+    }
+}
 
+//Delete a firewall DELETE
+export const deleteFirewall = async (req,res)=>{
+    //console.log("Data received at backend")
+    //console.log(req.body)
+    try{
+        const deleted = await firewallModel.findByIdAndDelete(req.body._id)
+        
+        console.log("Firewall deleted Successfully")
+        res.status(200).json(deleted)
+    }
+    catch(error){
+        res.status(400).json({"msg": "Delete failed"})
+    }
+}
+
+//Adding a Switch CREATE
 export const addSwitch = async (req,res)=>{
     console.log("Data received at backend")
     console.log(req.body)
@@ -169,6 +232,36 @@ export const getSwitchDetails = async (req,res)=>{
     }
     catch(error){
         console.log("Error:",error)
+    }
+}
+
+//Update a switch UPDATE
+export const updateSwitch = async (req,res)=>{
+    //console.log("Data received at backend")
+    //console.log(req.body)
+    try{
+        const updated = await switchModel.findByIdAndUpdate(req.body._id, req.body)
+        
+        console.log("Switch updated Successfully")
+        res.status(200).json(updated)
+    }
+    catch(error){
+        res.status(400).json({"msg": "Update failed"})
+    }
+}
+
+//Delete a switch DELETE
+export const deleteSwitch= async (req,res)=>{
+    //console.log("Data received at backend")
+    //console.log(req.body)
+    try{
+        const deleted = await switchModel.findByIdAndDelete(req.body._id)
+        
+        console.log("Switch deleted Successfully")
+        res.status(200).json(deleted)
+    }
+    catch(error){
+        res.status(400).json({"msg": "Delete failed"})
     }
 }
 
@@ -204,6 +297,35 @@ export const getWLCDetails = async (req,res)=>{
         console.log("Error:",error)
     }
 }
+//Update a WLC UPDATE
+export const updateWLC = async (req,res)=>{
+    //console.log("Data received at backend")
+    //console.log(req.body)
+    try{
+        const updated = await wlcModel.findByIdAndUpdate(req.body._id, req.body)
+        
+        console.log("Switch updated Successfully")
+        res.status(200).json(updated)
+    }
+    catch(error){
+        res.status(400).json({"msg": "Update failed"})
+    }
+}
+
+//Delete a WLC DELETE
+export const deleteWLC= async (req,res)=>{
+    //console.log("Data received at backend")
+    //console.log(req.body)
+    try{
+        const deleted = await wlcModel.findByIdAndDelete(req.body._id)
+        
+        console.log("Switch deleted Successfully")
+        res.status(200).json(deleted)
+    }
+    catch(error){
+        res.status(400).json({"msg": "Delete failed"})
+    }
+}
 
 export const addAP = async (req,res)=>{
     console.log("Data received at backend")
@@ -237,6 +359,35 @@ export const getAPDetails = async (req,res)=>{
         console.log("Error:",error)
     }
 }
+//Update a AP UPDATE
+export const updateAP = async (req,res)=>{
+    //console.log("Data received at backend")
+    //console.log(req.body)
+    try{
+        const updated = await apModel.findByIdAndUpdate(req.body._id, req.body)
+        
+        console.log("AP updated Successfully")
+        res.status(200).json(updated)
+    }
+    catch(error){
+        res.status(400).json({"msg": "Update failed"})
+    }
+}
+
+//Delete a AP DELETE
+export const deleteAP= async (req,res)=>{
+    //console.log("Data received at backend")
+    //console.log(req.body)
+    try{
+        const deleted = await apModel.findByIdAndDelete(req.body._id)
+        
+        console.log("AP deleted Successfully")
+        res.status(200).json(deleted)
+    }
+    catch(error){
+        res.status(400).json({"msg": "Delete failed"})
+    }
+}
 
 export const addSSID = async (req,res)=>{
     console.log("Data received at backend")
@@ -268,6 +419,35 @@ export const getSSIDDetails = async (req,res)=>{
     }
     catch(error){
         console.log("Error:",error)
+    }
+}
+//Update a SSID UPDATE
+export const updateSSID= async (req,res)=>{
+    //console.log("Data received at backend")
+    //console.log(req.body)
+    try{
+        const updated = await ssidModel.findByIdAndUpdate(req.body._id, req.body)
+        
+        console.log("SSID updated Successfully")
+        res.status(200).json(updated)
+    }
+    catch(error){
+        res.status(400).json({"msg": "Update failed"})
+    }
+}
+
+//Delete a SSID DELETE
+export const deleteSSID= async (req,res)=>{
+    //console.log("Data received at backend")
+    //console.log(req.body)
+    try{
+        const deleted = await ssidModel.findByIdAndDelete(req.body._id)
+        
+        console.log("SSID deleted Successfully")
+        res.status(200).json(deleted)
+    }
+    catch(error){
+        res.status(400).json({"msg": "Delete failed"})
     }
 }
 
