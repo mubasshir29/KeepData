@@ -113,7 +113,7 @@ export const updateInternetConnection = async (connection)=>{
     }
 }
 //delete internet
-export const udeleteInternetConnection = async (connection)=>{
+export const deleteInternetConnection = async (connection)=>{
     try{
         const response = await axios.delete(`${server}/edit/internet`,connection)
         console.log("Response received", response.status)
@@ -142,9 +142,11 @@ export const addFirewall = async (newFirewall)=>{
 //Getting a firewall details
 export const getFirewallDetails = async (id)=>{
     try{
+        console.log("From API", id)
         const response = await axios.get(`${server}/firewall/${id}`)
-        // console.log("Getting firewall details from backend")
+        console.log("Getting firewall details from backend")
         //console.log("Firewall Data received", response.data)
+        console.log(response.data)
         return response.data
     }
     catch(error){
@@ -158,6 +160,7 @@ export const getAllFirewallDetails = async ()=>{
         const response = await axios.get(`${server}/firewall`)
         // console.log("Getting firewall details from backend")
         //console.log("Firewall Data received", response.data)
+        //console.log(response.data)
         return response.data
     }
     catch(error){
@@ -166,11 +169,12 @@ export const getAllFirewallDetails = async ()=>{
 }
 //update firewall details
 export const updateFirewall = async (firewall)=>{
+    console.log(firewall)
     try{
-        const response = await axios.post(`${server}/firewall/edit`, firewall)
-        // console.log("Getting firewall details from backend")
-        //console.log("Firewall Data received", response.data)
-        return response.data
+        const response = await axios.post(`${server}/edit/firewall`, firewall)
+        console.log("Getting firewall details from backend")
+        console.log("Firewall Data received", response)
+        return response
     }
     catch(error){
         return error

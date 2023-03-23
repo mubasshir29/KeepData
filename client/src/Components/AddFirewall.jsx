@@ -13,7 +13,7 @@ function AddFirewall() {
             <div className='text-slate-300 flex-1 flex gap-3 bg-slate-900 rounded-lg'>
                     <label className='text-lg rounded-l-lg bg-slate-800 m-0 py-2 px-4'>Branch</label>
                     <select className='flex-1 bg-slate-900  rounded-md py-1 px-2 text-lg focus:outline-none'>
-                      <option className='w-full text-center'>--Select Branch--</option>
+                      <option className='w-full'>--Select Branch--</option>
                       {branches && branches.map(branch => <option>{branch.name}</option>)}
                     </select>
                   </div>

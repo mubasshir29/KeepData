@@ -30,7 +30,7 @@ function EditInternet() {
     e.preventDefault()
     console.log(updatedInternet)
     const response = await updateInternetConnection(updatedInternet)
-    console.log("In Edit table",response.status)
+    console.log("In Edit",response.status)
     if(response.status == 200){
       console.log("Connection updated Successfully")
       navigate("/internet")

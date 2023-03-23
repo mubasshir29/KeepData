@@ -3,7 +3,7 @@ import { FaRegEdit } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 
 function FirewallCard({firewall}) {
-    console.log(firewall)
+    //console.log(firewall)
   return (
     <div className='bg-slate-700 w-[540px] rounded-xl relative group'>
         <NavLink to={`/edit-firewall/${firewall._id}`}><div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>

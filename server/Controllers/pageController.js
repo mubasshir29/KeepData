@@ -157,8 +157,10 @@ export const getFirewallDetails = async (req,res)=>{
     try{
         if(req.params.id){
             const id = req.params.id
-            const connection = firewallModel.findOne({branch_code:id})
-            res.status(200).json(connection)
+            console.log("Request for ID",req.params.id)
+            const requested = await firewallModel.findOne({_id:id})
+            console.log(requested)
+            res.status(200).json(requested)
         }
         else{
             const firewalls = await firewallModel.find()
@@ -173,8 +175,8 @@ export const getFirewallDetails = async (req,res)=>{
 }
 //Update a firewall UPDATE
 export const updateFirewall = async (req,res)=>{
-    //console.log("Data received at backend")
-    //console.log(req.body)
+    console.log("Data received at backend")
+    console.log(req.body)
     try{
         const updated = await firewallModel.findByIdAndUpdate(req.body._id, req.body)
         
@@ -220,7 +222,7 @@ export const getSwitchDetails = async (req,res)=>{
     try{
         if(req.params.id){
             const id = req.params.id
-            const Switch = switchModel.findOne({branch_code:id})
+            const Switch = switchModel.findOne({_id:id})
             res.status(200).json(Switch)
         }
         else{
@@ -283,7 +285,7 @@ export const getWLCDetails = async (req,res)=>{
     try{
         if(req.params.id){
             const id = req.params.id
-            const controller = wlcModel.findOne({branch_code:id})
+            const controller = wlcModel.findOne({_id:id})
             res.status(200).json(controller)
         }
         else{
@@ -345,7 +347,7 @@ export const getAPDetails = async (req,res)=>{
     try{
         if(req.params.id){
             const id = req.params.id
-            const ap = apModel.findOne({branch_code:id})
+            const ap = apModel.findOne({_id:id})
             res.status(200).json(ap)
         }
         else{
@@ -364,7 +366,7 @@ export const updateAP = async (req,res)=>{
     //console.log("Data received at backend")
     //console.log(req.body)
     try{
-        const updated = await apModel.findByIdAndUpdate(req.body._id, req.body)
+        const updated = await apModel.findByIdAndUpdate(_id,req.body.id)
         
         console.log("AP updated Successfully")
         res.status(200).json(updated)
@@ -407,7 +409,7 @@ export const getSSIDDetails = async (req,res)=>{
     try{
         if(req.params.id){
             const id = req.params.id
-            const ssid = ssidModel.findOne({branch_code:id})
+            const ssid = ssidModel.findOne({_id:id})
             res.status(200).json(ssid)
         }
         else{
@@ -426,7 +428,7 @@ export const updateSSID= async (req,res)=>{
     //console.log("Data received at backend")
     //console.log(req.body)
     try{
-        const updated = await ssidModel.findByIdAndUpdate(req.body._id, req.body)
+        const updated = await ssidModel.findByIdAndUpdate(_id, req.body.id)
         
         console.log("SSID updated Successfully")
         res.status(200).json(updated)
