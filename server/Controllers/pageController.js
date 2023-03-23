@@ -222,8 +222,9 @@ export const getSwitchDetails = async (req,res)=>{
     try{
         if(req.params.id){
             const id = req.params.id
-            const Switch = switchModel.findOne({_id:id})
-            res.status(200).json(Switch)
+            const nswitch = await switchModel.findOne({_id:id})
+            //console.log(nswitch)
+            res.status(200).json(nswitch)
         }
         else{
             const switches = await switchModel.find()
@@ -239,12 +240,11 @@ export const getSwitchDetails = async (req,res)=>{
 
 //Update a switch UPDATE
 export const updateSwitch = async (req,res)=>{
-    //console.log("Data received at backend")
-    //console.log(req.body)
+    console.log("Data received at backend")
+    console.log("Req body",req.body)
     try{
         const updated = await switchModel.findByIdAndUpdate(req.body._id, req.body)
-        
-        console.log("Switch updated Successfully")
+        console.log("Switch found", updated)
         res.status(200).json(updated)
     }
     catch(error){

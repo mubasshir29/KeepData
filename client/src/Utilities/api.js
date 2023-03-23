@@ -209,10 +209,11 @@ export const addSwitch = async (newSwitch)=>{
 
 //Gettinga a switch details
 export const getSwitchDetails = async (id)=>{
+    console.log("In API")
     try{
         const response = await axios.get(`${server}/switch/${id}`)
-        // console.log("Getting switch details from backend")
-        //console.log("Firewall Data received", response.data)
+        console.log("Getting switch details from backend")
+        console.log("Firewall Data received", response.data)
         return response.data
     }
     catch(error){
@@ -234,11 +235,12 @@ export const getAllSwitchDetails = async ()=>{
 }
 //update switch details
 export const updateSwitch = async (nswitch)=>{
+    console.log("In API",nswitch)
     try{
-        const response = await axios.post(`${server}/switch/edit`, nswitch)
-        // console.log("Getting firewall details from backend")
-        //console.log("Firewall Data received", response.data)
-        return response.data
+        const response = await axios.post(`${server}/edit/switch`, nswitch)
+        console.log("Getting firewall details from backend")
+        console.log("Firewall Data received", response.data)
+        return response
     }
     catch(error){
         return error
