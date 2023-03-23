@@ -281,11 +281,12 @@ export const addWLC = async (req,res)=>{
     }
 }
 export const getWLCDetails = async (req,res)=>{
-    //console.log("Request for Firewall details")
+    console.log("Request for Controller details")
     try{
         if(req.params.id){
             const id = req.params.id
-            const controller = wlcModel.findOne({_id:id})
+            const controller = await wlcModel.findOne({_id:id})
+            console.log("FoundController",controller)
             res.status(200).json(controller)
         }
         else{
@@ -301,12 +302,12 @@ export const getWLCDetails = async (req,res)=>{
 }
 //Update a WLC UPDATE
 export const updateWLC = async (req,res)=>{
-    //console.log("Data received at backend")
-    //console.log(req.body)
+    console.log("Data received at backend")
+    console.log(req.body)
     try{
         const updated = await wlcModel.findByIdAndUpdate(req.body._id, req.body)
         
-        console.log("Switch updated Successfully")
+        console.log("Controller updated Successfully")
         res.status(200).json(updated)
     }
     catch(error){

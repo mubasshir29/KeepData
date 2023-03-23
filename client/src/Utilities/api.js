@@ -275,10 +275,11 @@ export const addWLC = async (newWLC)=>{
 
 //Getting a wlc details
 export const getWlcDetails = async (id)=>{
+    console.log("In API")
     try{
         const response = await axios.get(`${server}/wlc/${id}`)
-        //console.log("Getting firewall details from backend")
-        //console.log("WLC Data received", response.data)
+        // console.log("Getting firewall details from backend")
+        // console.log("WLC Data received", response.data)
         return response.data
     }
     catch(error){
@@ -299,12 +300,13 @@ export const getAllWlcDetails = async ()=>{
     }
 }
 //update switch details
-export const updateWLC = async (nswitch)=>{
+export const updateWLC = async (wlc)=>{
+    console.log("Updating WLC")
     try{
-        const response = await axios.post(`${server}/wlc/edit`, nswitch)
-        // console.log("Getting firewall details from backend")
-        //console.log("Firewall Data received", response.data)
-        return response.data
+        const response = await axios.post(`${server}/edit/wlc`, wlc)
+        console.log("Getting controller details from backend")
+        console.log("Controller Data received", response.data)
+        return response
     }
     catch(error){
         return error
