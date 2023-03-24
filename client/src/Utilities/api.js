@@ -428,10 +428,11 @@ export const getAllSSIDDetails = async ()=>{
         console.log("Error in getting data",error)
     }
 }
-//update ap details
+//update SSID  details
 export const updateSSID = async (ssid)=>{
+    console.log("in API",ssid)
     try{
-        const response = await axios.post(`${server}/ssid/edit`, ssid)
+        const response = await axios.post(`${server}/edit/ssid`,ssid)
         // console.log("Getting firewall details from backend")
         //console.log("Firewall Data received", response.data)
         return response.data

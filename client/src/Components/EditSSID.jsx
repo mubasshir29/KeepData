@@ -1,5 +1,5 @@
 import React,{useState, useEffect, useContext} from 'react'
-import {getSSIDDetails} from './../Utilities/api.js'
+import {getSSIDDetails,updateSSID} from './../Utilities/api.js'
 import { useNavigate, useParams } from 'react-router-dom'
 import {DataContext} from '../Utilities/DataContextProvider'
 
@@ -13,8 +13,10 @@ function EditSSID() {
   const setValues = (e)=>{
     setUpdatedSSID({...updatedSSID, [e.target.name]:e.target.value})
   }
-  const onSave = (e)=>{
-
+  const onSave = async (e)=>{
+    console.log(updatedSSID)
+    const response = await updateSSID(updatedSSID)
+    console.log(response)
   }
 
   const gettingSsidDetails = async ()=>{

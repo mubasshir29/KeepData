@@ -427,10 +427,10 @@ export const getSSIDDetails = async (req,res)=>{
 //Update a SSID UPDATE
 export const updateSSID= async (req,res)=>{
     //console.log("Data received at backend")
-    //console.log(req.body)
+    console.log("Update SSID",req.body)
     try{
         const updated = await ssidModel.findByIdAndUpdate(_id, req.body.id)
-        
+        console.log(updated)
         console.log("SSID updated Successfully")
         res.status(200).json(updated)
     }
