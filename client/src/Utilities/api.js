@@ -433,9 +433,9 @@ export const updateSSID = async (ssid)=>{
     console.log("in API",ssid)
     try{
         const response = await axios.post(`${server}/edit/ssid`,ssid)
-        // console.log("Getting firewall details from backend")
-        //console.log("Firewall Data received", response.data)
-        return response.data
+        console.log("Getting firewall details from backend")
+        console.log("SSID response received", response)
+        return response
     }
     catch(error){
         return error

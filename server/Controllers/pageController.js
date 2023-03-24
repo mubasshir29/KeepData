@@ -367,7 +367,7 @@ export const updateAP = async (req,res)=>{
     //console.log("Data received at backend")
     //console.log(req.body)
     try{
-        const updated = await apModel.findByIdAndUpdate(_id,req.body.id)
+        const updated = await apModel.findByIdAndUpdate(req.body._id,req.body)
         
         console.log("AP updated Successfully")
         res.status(200).json(updated)
@@ -427,12 +427,15 @@ export const getSSIDDetails = async (req,res)=>{
 //Update a SSID UPDATE
 export const updateSSID= async (req,res)=>{
     //console.log("Data received at backend")
-    console.log("Update SSID",req.body)
+    console.log("Request for",req.body.id)
     try{
-        const updated = await ssidModel.findByIdAndUpdate(_id, req.body.id)
+        console.log("Trying to find in DB")
+        const updated = await ssidModel.findByIdAndUpdate(req.body._id, req.body)
         console.log(updated)
-        console.log("SSID updated Successfully")
-        res.status(200).json(updated)
+        if(updated){
+            console.log("SSID updated Successfully")
+            res.status(200).json(updated)
+        }
     }
     catch(error){
         res.status(400).json({"msg": "Update failed"})

@@ -5,6 +5,7 @@ import {DataContext} from '../Utilities/DataContextProvider'
 
 function EditSSID() {
   const {id} = useParams()
+  const navigate = useNavigate()
   const {branches,wlc} = useContext(DataContext)
 
   const [ssid,setSSID] = useState()
@@ -16,7 +17,10 @@ function EditSSID() {
   const onSave = async (e)=>{
     console.log(updatedSSID)
     const response = await updateSSID(updatedSSID)
-    console.log(response)
+    if(response.status === 200){
+      console.log("SSID Updated successfully")
+      navigate('/ssid')
+    }
   }
 
   const gettingSsidDetails = async ()=>{
