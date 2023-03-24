@@ -391,11 +391,11 @@ export const deleteAP = async (ap)=>{
 
 //Adding an SSID
 export const addSSID = async (newSSID)=>{
-    //console.log(newSSID)
+    console.log(newSSID)
     try{
         const response = await axios.post(`${server}/new/ssid`,newSSID)
-        //console.log("Response received", response.status)
-        //console.log("Response to Add Firewall",response.data)
+        console.log("Response received", response.status)
+        console.log("Response to Add Firewall",response.data)
         return response;
     }
     catch(error){

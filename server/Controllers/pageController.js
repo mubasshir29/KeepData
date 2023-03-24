@@ -406,11 +406,11 @@ export const addSSID = async (req,res)=>{
     }
 }
 export const getSSIDDetails = async (req,res)=>{
-    //console.log("Request for Firewall details")
+    console.log("Request for SSID details", req.params.id)
     try{
         if(req.params.id){
             const id = req.params.id
-            const ssid = ssidModel.findOne({_id:id})
+            const ssid = await ssidModel.findOne({_id:id})
             res.status(200).json(ssid)
         }
         else{
