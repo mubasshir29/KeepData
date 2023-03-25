@@ -11,6 +11,7 @@ function AddAP() {
   const [selectedBranch, setSelectedBranch] = useState()
   const [importButton, setImportButton] = useState(false)
   const [importedFile, setImportedFile] = useState()
+  const [data,setData] = useState()
   const navigate = useNavigate()
 
   const initialValues = {
@@ -24,39 +25,8 @@ function AddAP() {
     description: ""
   }
   const [ap,setAP] = useState(initialValues)
-  const [newAP, setNewAP] = useState(initialValues)
-
   const setValues = (e)=>{
     setAP({...ap, [e.target.name]:e.target.value})
-  }
-
-  const convertData = (importedAPs)=>{
-    console.log(importedAPs)
-    const newData = []
-
-    importedAPs.forEach(ap => {
-      console.log("AP in loop", ap)
-      setNewAP({...newAP, branch : ap.Branch,
-        controller : ap.Controller,
-        name : ap.Name,
-        model : ap.Model,
-        serial : ap.Serial,
-        management_ip : ap.IP_Address,
-        mac_address : ap.MAC_address,
-        description : ap.Description})
-        console.log(newAP)
-      newData.push(newAP)
-    })
-    console.log("NEw AP",newData)
-    newData.forEach(async ap => {
-      const response = await addAP(ap)
-      console.log(response)
-        if(response.status == 200){
-          console.log("AP added successfully")
-          return;
-        }
-        else console.log("Error occured")
-    })
   }
 
   const onSave = async (e)=>{
@@ -66,9 +36,22 @@ function AddAP() {
         header: true,
         skipEmptyLines: true,
         complete: (results)=>{
-          convertData(results.data)
+          setData(results.data)
         }
       })
+      if(data){
+        data.forEach(async ap => {
+          console.log(ap)
+          const response = await addAP(ap)
+          console.log(response)
+            if(response.status == 200){
+              console.log("AP added successfully")
+              return;
+            }
+            else console.log("Error occured")
+          
+        })
+      }
     }
    else{
     const response = await addAP(ap)
