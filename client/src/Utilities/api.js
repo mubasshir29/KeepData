@@ -327,11 +327,11 @@ export const deleteWLC= async (wlc)=>{
 
 //Adding an AP
 export const addAP = async (newAP)=>{
-    //console.log(newAP)
+    console.log(newAP)
     try{
         const response = await axios.post(`${server}/new/ap`,newAP)
-        //console.log("Response received", response.status)
-        //console.log("Response to Add Firewall",response.data)
+        console.log("Response received", response.status)
+        console.log("Response to Add AP",response)
         return response;
     }
     catch(error){
@@ -343,8 +343,8 @@ export const addAP = async (newAP)=>{
 export const getAPDetails = async (id)=>{
     try{
         const response = await axios.get(`${server}/ap/${id}`)
-        //console.log("Getting firewall details from backend")
-        //console.log("WLC Data received", response.data)
+        console.log("Getting AP details from backend")
+        console.log("WLC Data received", response.data)
         return response.data
     }
     catch(error){
@@ -367,19 +367,20 @@ export const getAllAPDetails = async ()=>{
 //update ap details
 export const updateAP = async (ap)=>{
     try{
-        const response = await axios.post(`${server}/wlc/edit`, ap)
+        const response = await axios.post(`${server}/edit/ap`, ap)
         // console.log("Getting firewall details from backend")
         //console.log("Firewall Data received", response.data)
-        return response.data
+        return response
     }
     catch(error){
         return error
     }
 }
 //delete ap details
-export const deleteAP = async (ap)=>{
+export const deleteAP = async (id)=>{
+    console.log("In API", id)
     try{
-        const response = await axios.delete(`${server}/wlc/delete`, ap)
+        const response = await axios.delete(`${server}/delete/ap/${id}`,)
         // console.log("Getting firewall details from backend")
         //console.log("Firewall Data received", response.data)
         return response.data

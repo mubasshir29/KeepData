@@ -344,12 +344,13 @@ export const addAP = async (req,res)=>{
     }
 }
 export const getAPDetails = async (req,res)=>{
-    //console.log("Request for Firewall details")
+    console.log("Request for AP details")
     try{
         if(req.params.id){
             const id = req.params.id
-            const ap = apModel.findOne({_id:id})
-            res.status(200).json(ap)
+            const requested = await apModel.findOne({_id:id})
+            console.log(requested)
+            res.status(200).json(requested)
         }
         else{
             const aps = await apModel.find()
@@ -364,8 +365,8 @@ export const getAPDetails = async (req,res)=>{
 }
 //Update a AP UPDATE
 export const updateAP = async (req,res)=>{
-    //console.log("Data received at backend")
-    //console.log(req.body)
+    console.log("Data received at backend")
+    console.log(req.body)
     try{
         const updated = await apModel.findByIdAndUpdate(req.body._id,req.body)
         
@@ -379,10 +380,10 @@ export const updateAP = async (req,res)=>{
 
 //Delete a AP DELETE
 export const deleteAP= async (req,res)=>{
-    //console.log("Data received at backend")
-    //console.log(req.body)
+    console.log("Data received at backend")
+    console.log(req.params.id)
     try{
-        const deleted = await apModel.findByIdAndDelete(req.body._id)
+        const deleted = await apModel.findByIdAndDelete(req.params.id)
         
         console.log("AP deleted Successfully")
         res.status(200).json(deleted)

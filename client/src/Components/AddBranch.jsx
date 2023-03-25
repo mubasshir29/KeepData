@@ -1,5 +1,6 @@
 import React from 'react'
 import FormInputField from './FormInputField'
+import { NavLink } from 'react-router-dom';
 
 function AddBranch() {
   return (
@@ -7,6 +8,7 @@ function AddBranch() {
         <h1 className='text-3xl font-bold mx-auto mt-6 text-indigo-500'>Add Branch</h1>
         <div className='form-container w-1/2 bg-gradient-to-r from-slate-600 to-slate-700 mx-auto px-10 py-10 mt-6 rounded-xl'>
             <form className='flex flex-col flex-nowrap gap-6 items-stretch'>
+            <span className='text-indigo-500 underline'><NavLink to='/import/branch'>Import file --&gt;</NavLink></span>
               <div className='text-slate-300 flex p-0 gap-3 rounded-lg items-center bg-slate-900'>
                 <label className='text-lg rounded-l-lg bg-slate-800 m-0 py-2 px-4'>Name</label>
                 <input type='text' className=' flex-1 py-1 px-2 text-lg m-0 focus:outline-none bg-slate-900'></input>

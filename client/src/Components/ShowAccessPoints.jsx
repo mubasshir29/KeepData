@@ -4,9 +4,8 @@ import { FaRegEdit,FaFileExport } from "react-icons/fa";
 import { CSVLink , CSVDownload } from "react-csv";
 import { VscExport } from "react-icons/vsc";
 import { NavLink } from 'react-router-dom';
-
-
-
+import { MdDeleteOutline } from "react-icons/md";
+import {deleteAP} from './../Utilities/api'
 
 
 function ShowAccessPoints() {
@@ -39,6 +38,13 @@ function ShowAccessPoints() {
           branchesHasAPs.push(router.branch)
         }
     })
+  }
+
+  const handleDeleteAP = async (id)=>{
+    console.log(id)
+    const response = await deleteAP(id)
+    console.log(response)
+
   }
 
   return (
@@ -75,7 +81,8 @@ function ShowAccessPoints() {
                     <td className='p-2'>{router.management_ip}</td>
                     <td className='p-2'>{router.mac_address}</td>
                     <td className='p-2'>{router.description}</td>
-                    <NavLink to={`/edit-ap/${router._id}`}><div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
+                    <NavLink to={`/edit-ap/${router._id}`}><div className='absolute top-2 right-8 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
+                    <button onClick={()=>handleDeleteAP(router._id)}><div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><MdDeleteOutline/></div></button>
                   </tr>
                 )
               }

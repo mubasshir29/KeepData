@@ -39,6 +39,7 @@ import EditSwitch from './Components/EditSwitch';
 import EditWLC from './Components/EditWLC';
 import EditSSID from './Components/EditSSID';
 import EditAP from './Components/EditAP';
+import ImportCSV from './Components/ImportCSV';
 
 function App() {
   
@@ -55,6 +56,7 @@ function App() {
         <Sidebar/>
         <Routes>
           <Route path='/' element={<Home/>} />
+          <Route path='/import/:option' element={<ImportCSV/>} />
           <Route path='branches' element={<Branches/>} />
           <Route path='internet' element={<ShowInternet/>} />
           <Route path='firewall' element={<ShowFirewalls/>} />

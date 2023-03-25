@@ -40,7 +40,7 @@ pageRouter.get('/ap',getAPDetails)
 pageRouter.get('/ap/:id',getAPDetails)
 pageRouter.post('/new/ap',addAP)
 pageRouter.post('/edit/ap',updateAP)
-pageRouter.post('/delete/ap',deleteAP)
+pageRouter.delete('/delete/ap/:id',deleteAP)
 
 pageRouter.get('/ssid',getSSIDDetails)
 pageRouter.get('/ssid/:id',getSSIDDetails)
