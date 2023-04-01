@@ -1,13 +1,25 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { NavLink } from 'react-router-dom';
-import { FaAmazon, FaHome, FaInternetExplorer,FaWifi } from "react-icons/fa";
+import { FaInternetExplorer,FaWifi } from "react-icons/fa";
 import { BsFillHouseFill,BsFillShieldLockFill,BsHddNetworkFill,BsFillDiagram3Fill } from "react-icons/bs";
 import { HiBuildingOffice } from "react-icons/hi2";
 import { VscServerProcess } from "react-icons/vsc";
 import { MdRouter,MdSettings } from "react-icons/md";
 import DashboardCard from './DashboardCard';
+import { useSelector } from 'react-redux';
+
+
+
 function Home() {
-    console.log("Home screen loaded")
+
+    const allBranches = useSelector(state => state.dashboardReducer.allBranches)
+    const allInternet= useSelector(state => state.dashboardReducer.allInternet)
+    const allFirewalls= useSelector(state => state.dashboardReducer.allFirewalls)
+    const allSwitches= useSelector(state => state.dashboardReducer.allSwitches)
+    const allWLC= useSelector(state => state.dashboardReducer.allWLC)
+    const allSSID= useSelector(state => state.dashboardReducer.allSSID)
+    const allAPS= useSelector(state => state.dashboardReducer.allAPS)
+
   return (
     <div className='w-full flex flex-col ml-64 mt-20'>
 
@@ -16,43 +28,43 @@ function Home() {
           <div className='dashboard-cards flex flex-wrap gap-8 justify-center'>
 
             <NavLink to='/branches'>
-            <DashboardCard details={{title:"Branches",value:"6"}}>
+            <DashboardCard details={{title:"Branches",value: allBranches.length}}>
               <HiBuildingOffice/>
             </DashboardCard>
             </NavLink>
 
             <NavLink to='/internet'>
-            <DashboardCard details={{title:"Internet",value:"17"}}>
+            <DashboardCard details={{title:"Internet",value:allInternet.length}}>
               <FaInternetExplorer/>
             </DashboardCard>
             </NavLink>
 
             <NavLink to='/firewall'>
-            <DashboardCard details={{title:"Firewalls",value:"8"}}>
+            <DashboardCard details={{title:"Firewalls",value:allFirewalls.length}}>
               <BsFillShieldLockFill/>
             </DashboardCard>
             </NavLink>
 
             <NavLink to='/switches'>
-            <DashboardCard details={{title:"Switches",value:"10"}}>
+            <DashboardCard details={{title:"Switches",value:allSwitches.length}}>
               <BsHddNetworkFill/>
             </DashboardCard>
             </NavLink>
 
             <NavLink to='/wireless'>
-            <DashboardCard details={{title:"WLC",value:"4"}}>
+            <DashboardCard details={{title:"WLC",value:allWLC.length}}>
               <VscServerProcess/>
             </DashboardCard>
             </NavLink>
 
-            {/* <NavLink to='/branches'>
-            <DashboardCard details={{title:"SSID",value:"24"}}>
+            <NavLink to='/branches'>
+            <DashboardCard details={{title:"SSID",value:allSSID.length}}>
               <FaWifi/>
             </DashboardCard>
-            </NavLink> */}
+            </NavLink>
 
             <NavLink to='/access-points'>
-            <DashboardCard details={{title:"Access Points",value:"100"}}>
+            <DashboardCard details={{title:"WiFi AP",value:allAPS.length}}>
               <MdRouter/>
             </DashboardCard>
             </NavLink>

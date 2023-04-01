@@ -1,6 +1,4 @@
-import React, { useContext } from 'react'
-import {DataContext} from './../Utilities/DataContextProvider'
-import WirelessCard from './WirelessCard'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaRegEdit } from "react-icons/fa";
 import { CSVLink } from "react-csv";
@@ -9,11 +7,13 @@ import { NavLink } from 'react-router-dom';
 
 
 function ShowWirelessControllers() {
-  const logged = useSelector((state)=>state.loggedStatus)
-  const {wlc,ssid,branches} = useContext(DataContext)
+  
+  const allBranches = useSelector(state => state.dashboardReducer.allBranches)
+  const allWLC= useSelector(state => state.dashboardReducer.allWLC)
+
   let branchHasWLC = []
-  if(wlc){
-    wlc.forEach(controller => {
+  if(allWLC){
+    allWLC.forEach(controller => {
       if(branchHasWLC.includes(controller.branch)){
         return;
       }
@@ -70,7 +70,7 @@ function ShowWirelessControllers() {
                   <th className='py-1 '>Software</th>
                   <th className='py-1 '>Support</th>
                 </tr>
-                {wlc && wlc.map(controller =>{
+                {allWLC && allWLC.map(controller =>{
                   if(branch == controller.branch){
                     wlcData.push(controller)
                     file = controller.branch
@@ -89,7 +89,7 @@ function ShowWirelessControllers() {
                 }
             </table>
             <div className='w-full flex gap-3'>
-              <h2 className='text-2xl font-bold'>{(branches.find(e => e.branch_code == branch)).name}</h2>
+              <h2 className='text-2xl font-bold'>{(allBranches.find(e => e.branch_code == branch)).name}</h2>
               <div className='bg-slate-700 flex-grow-0 flex items-center py-0.5 px-4 rounded-full '><CSVLink  data={wlcData} headers={wlcHeaders} filename={`${file}_wlc.csv`} className='flex gap-2 items-center'>Export <VscExport/></CSVLink ></div>
               </div>
           </div>

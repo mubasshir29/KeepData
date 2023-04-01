@@ -1,11 +1,12 @@
-import React,{useContext} from 'react'
-import {DataContext} from './../Utilities/DataContextProvider'
+import React from 'react'
 import InternetCard from './InternetCard'
 import { CSVLink } from "react-csv";
 import { VscExport } from "react-icons/vsc";
+import { useSelector } from 'react-redux';
 
 function ShowInternet() {
-  const {branches,connections} = useContext(DataContext)
+  const allBranches = useSelector(state => state.dashboardReducer.allBranches)
+  const allInternet= useSelector(state => state.dashboardReducer.allInternet)
 
   let file=''
   const internetHeaders = [
@@ -22,12 +23,12 @@ function ShowInternet() {
     <div className='w-full flex flex-col ml-64 mt-20'>
     <div className='w-11/12 mx-auto text-white flex flex-col gap-12 justify-center flex-wrap'>
       
-      {branches && branches.map(branch => { 
+      {allBranches && allBranches.map(branch => { 
         let internetData =[]
         return <div className='flex flex-col-reverse gap-3'>
           
           <div className='flex gap-8 flex-wrap'>  
-          {connections && connections.map(internet =>  {
+          {allInternet && allInternet.map(internet =>  {
             if(branch.branch_code == internet.branch){
               console.log(internet.branch)
               internetData.push(internet)

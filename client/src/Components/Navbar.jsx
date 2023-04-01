@@ -7,8 +7,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import {setLogin, setLogout} from './../Redux/authSlice.js'
 
 function Navbar() {
-  const logged = useSelector((state)=>state.loggedStatus)
-  const username = useSelector((state)=>state.username)
+  const logged = useSelector((state)=>state.authReducer.loggedStatus)
+  const username = useSelector((state)=>state.authReducer.username)
   const dispatch = useDispatch()
 
   const navigate = useNavigate()

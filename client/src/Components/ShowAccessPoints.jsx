@@ -1,15 +1,17 @@
-import React,{useContext, useState} from 'react'
-import {DataContext} from './../Utilities/DataContextProvider'
+import React,{ useState} from 'react'
 import { FaRegEdit,FaFileExport } from "react-icons/fa";
 import { CSVLink , CSVDownload } from "react-csv";
 import { VscExport } from "react-icons/vsc";
 import { NavLink } from 'react-router-dom';
 import { MdDeleteOutline } from "react-icons/md";
 import {deleteAP} from './../Utilities/api'
+import { useSelector, useDispatch } from 'react-redux'
 
 
 function ShowAccessPoints() {
-  const {branches,ap} = useContext(DataContext)
+  const logged = useSelector((state)=>state.authReducer.loggedStatus)
+  const allBranches = useSelector(state => state.dashboardReducer.allBranches)
+  const allAPS= useSelector(state => state.dashboardReducer.allAPS)
 
   //export to csv
   
@@ -28,8 +30,8 @@ function ShowAccessPoints() {
 
   let branchesHasAPs = []
 
-  if(ap){
-    ap.forEach(router => {
+  if(allAPS){
+    allAPS.forEach(router => {
       if(branchesHasAPs.includes(router.branch)){
         return;
       }
@@ -44,7 +46,7 @@ function ShowAccessPoints() {
     console.log(id)
     const response = await deleteAP(id)
     console.log(response)
-
+    
   }
 
   return (
@@ -65,8 +67,9 @@ function ShowAccessPoints() {
               <th className='py-1'>IP Address</th>
               <th className='py-1'>MAC</th>
               <th className='py-1 pr-2'>Description</th>
+              {logged && <th className='py-1 pr-2'>Action</th>}
             </tr>
-            {ap && ap.map(router => {
+            {allAPS && allAPS.map(router => {
               if(router.branch == branch){
                 data.push(router)
                 file = router.branch
@@ -81,15 +84,17 @@ function ShowAccessPoints() {
                     <td className='p-2'>{router.management_ip}</td>
                     <td className='p-2'>{router.mac_address}</td>
                     <td className='p-2'>{router.description}</td>
-                    <NavLink to={`/edit-ap/${router._id}`}><div className='absolute top-2 right-8 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
-                    <button onClick={()=>handleDeleteAP(router._id)}><div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><MdDeleteOutline/></div></button>
+                    {logged && <td className=''>
+                      <div className='flex justify-center gap-3 text-lg'><NavLink to={`/edit-ap/${router._id}`}><div className=' text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
+                      <button onClick={()=>handleDeleteAP(router._id)}><div className='text-slate-500 invisible group-hover:visible'><MdDeleteOutline/></div></button></div>
+                    </td>}
                   </tr>
                 )
               }
             })}
           </table>
           <div className='flex w-full justify-between items-center'>
-            <h2 className='text-2xl font-bold mb-2'>{(branches.find(e => e.branch_code == branch)).name}</h2>
+            <h2 className='text-2xl font-bold mb-2'>{(allBranches.find(e => e.branch_code == branch)).name}</h2>
             <div className='bg-slate-700 flex items-center py-0.5 px-4 rounded-full '><CSVLink  data={data} headers={headers} filename={`${file}_Access_Points.csv`} className='flex gap-2 items-center'>Export <VscExport/></CSVLink ></div>
           </div>
           </div>)

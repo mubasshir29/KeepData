@@ -195,7 +195,7 @@ export const deleteFirewall = async (firewall)=>{
 
 //Adding a switch
 export const addSwitch = async (newSwitch)=>{
-    //console.log(newSwitch)
+    console.log(newSwitch)
     try{
         const response = await axios.post(`${server}/new/switch`,newSwitch)
         console.log("Response received", response.status)
@@ -247,9 +247,10 @@ export const updateSwitch = async (nswitch)=>{
     }
 }
 //delete firewall details
-export const deleteSwitch = async (firewall)=>{
+export const deleteSwitch = async (id)=>{
+    console.log("In API", id)
     try{
-        const response = await axios.delete(`${server}/switch/delete`, firewall)
+        const response = await axios.delete(`${server}/delete/switch/${id}`)
         // console.log("Getting firewall details from backend")
         //console.log("Firewall Data received", response.data)
         return response.data
@@ -380,7 +381,7 @@ export const updateAP = async (ap)=>{
 export const deleteAP = async (id)=>{
     console.log("In API", id)
     try{
-        const response = await axios.delete(`${server}/delete/ap/${id}`,)
+        const response = await axios.delete(`${server}/delete/ap/${id}`)
         // console.log("Getting firewall details from backend")
         //console.log("Firewall Data received", response.data)
         return response.data
@@ -443,9 +444,9 @@ export const updateSSID = async (ssid)=>{
     }
 }
 //delete ap details
-export const deleteSSID = async (ssid)=>{
+export const deleteSSID = async (id)=>{
     try{
-        const response = await axios.delete(`${server}/ssid/delete`, ssid)
+        const response = await axios.delete(`${server}/delete/ssid/${id}`)
         // console.log("Getting firewall details from backend")
         //console.log("Firewall Data received", response.data)
         return response.data

@@ -25,6 +25,7 @@ function AddAP() {
     description: ""
   }
   const [ap,setAP] = useState(initialValues)
+
   const setValues = (e)=>{
     setAP({...ap, [e.target.name]:e.target.value})
   }
@@ -46,11 +47,13 @@ function AddAP() {
           console.log(response)
             if(response.status == 200){
               console.log("AP added successfully")
+              
               return;
             }
             else console.log("Error occured")
           
         })
+        navigate('/settings')
       }
     }
    else{
@@ -78,10 +81,10 @@ function AddAP() {
     setImportButton(!importButton)
   }
   return (
-    <div className='w-full flex flex-col ml-64 mt-20'>
+    <div className='w-full flex flex-col ml-64 mt-20 px-20'>
         <h1 className='text-3xl font-bold mx-auto mt-6 text-indigo-500'>Add AP</h1>
-        <div className='relative flex flex-col form-container w-1/2 bg-gradient-to-r from-slate-600 to-slate-700 mx-auto px-10 pt-5 pb-10 mt-6 rounded-xl'>
-          <button onClick={(e)=>importClick(e)} className=' w-32 self-end bg-slate-800 text-slate-400 px-4 py-1 rounded-full float-right mb-3'>{importButton?"Add Item":"Import CSV"}</button>
+        <div className='relative flex flex-col form-container w-full bg-gradient-to-r from-slate-600 to-slate-700 mx-auto px-10 pt-5 pb-10 mt-6 rounded-xl'>
+          <button onClick={(e)=>importClick(e)} className=' w-32 self-end bg-slate-800 text-slate-400 px-4 py-1 rounded-full float-right mb-1'>{importButton?"Add Item":"Import CSV"}</button>
           
           {/* Conditional rendering happening here */}
 
@@ -91,8 +94,13 @@ function AddAP() {
             <a className='text-indigo-500 cursor-pointer' href={importAPFile} download='import_APS'>Download template</a>
             <label class="block w-full">
               <input type="file" onChange={e => setImportedFile(e.target.files[0])}
-                className="bg-slate-900 block p-3  rounded-lg w-full text-sm text-slate-300 file:mr-4 file:py-2 file:px-4 file:border-0 file:bg-slate-800 file:text-slate-300 file:text-base hover:cursor-pointer file:rounded-lg" />
+                className="bg-slate-900 block  rounded-lg w-full text-sm text-slate-300 file:mr-4 file:py-2 file:px-4 file:border-0 file:bg-slate-800 file:text-slate-300 file:text-base hover:cursor-pointer file:rounded-lg" />
             </label>
+            <div className='mt-10 text-white '>
+              <p className='italic'>Note:</p>
+              <p className='text-xs opacity-70 mt-2'>Select WLC:<span className='ml-2 italic'> MINA-WLC-01, C9800-L-C-K9, WLC-9800-01</span></p>
+              <p className='text-xs opacity-70 mt-2'>Select Branch:<span className='ml-2 italic'> AVR, MINA, AAN, IS-KHI,IS-ISB, MMF  </span></p>
+            </div>
           </form>
               //IF condition fails below form will be endered
             :<form id='add-ap-form' className='clear-right flex flex-col flex-nowrap gap-6 items-stretch mt-3'>

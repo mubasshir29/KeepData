@@ -1,11 +1,13 @@
-import React, { useContext } from 'react'
-import {DataContext} from './../Utilities/DataContextProvider'
+import React from 'react'
 import SwitchCard from './SwitchCard'
 import { CSVLink } from "react-csv";
 import { VscExport } from "react-icons/vsc";
+import { useSelector } from 'react-redux';
 
 function ShowSwitches() {
-  const {switches,branches} = useContext(DataContext)
+  
+  const allBranches = useSelector(state => state.dashboardReducer.allBranches)
+  const allSwitches= useSelector(state => state.dashboardReducer.allSwitches)
 
   
   let file=''
@@ -22,12 +24,12 @@ function ShowSwitches() {
     <div className='w-full flex flex-col ml-64 mt-20'>
     <div className='w-11/12 mx-auto text-white flex flex-col gap-12 justify-center flex-wrap'>
       
-      {branches && branches.map(branch => {
+      {allBranches && allBranches.map(branch => {
         let swData =[]
         return <div className='flex flex-col-reverse gap-3'>
           
           <div className='flex gap-8 flex-wrap'>  
-          {switches && switches.map(nswitch =>  {
+          {allSwitches && allSwitches.map(nswitch =>  {
             
             if(branch.branch_code == nswitch.branch){
               console.log(nswitch.branch)

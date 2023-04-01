@@ -1,18 +1,21 @@
-import React,{useContext} from 'react'
-import {DataContext} from './../Utilities/DataContextProvider'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaRegEdit } from "react-icons/fa";
 import { CSVLink } from "react-csv";
 import { VscExport } from "react-icons/vsc";
 import { NavLink } from 'react-router-dom';
+import { MdDeleteOutline } from "react-icons/md";
+import {deleteSSID} from './../Utilities/api.js'
 
 function ShowSSID() {
-    const {ssid,branches} = useContext(DataContext)
-    const logged = useSelector((state)=>state.loggedStatus)
+    
+    const allBranches = useSelector(state => state.dashboardReducer.allBranches)
+    const allSSID= useSelector(state => state.dashboardReducer.allSSID)
+    const logged = useSelector((state)=>state.authReducer.loggedStatus)
 
     let branchHasSSID = []
-    if(ssid){
-        ssid.forEach(id => {
+    if(allSSID){
+      allSSID.forEach(id => {
         if(branchHasSSID.includes(id.branch)){
             return;
         }
@@ -34,22 +37,29 @@ function ShowSSID() {
         { label: "Description", key: "description" }
       ]
 
+      const handleDeleteSSID = async (id)=>{
+        console.log(id)
+        const response = await deleteSSID(id)
+        console.log(response)
+      }
+
   return (
     <div className='w-full flex flex-col ml-64 mt-20'>
         <div className='w-11/12 mx-auto text-slate-300 flex flex-col gap-12 justify-center flex-wrap'>
           {branchHasSSID && branchHasSSID.map(branch =>{
            return <div className='flex flex-col-reverse'>
             
-          <table className='text-center w-full'>
-            <tr className='bg-indigo-500 c'>
+          <table className='text-center w-full bg-yellow-300'>
+            <tr className='bg-indigo-500 '>
               <th className='py-1'>Branch</th>
               <th className='py-1'>Controller</th>
               <th className='py-1'>SSID</th>
               <th className='py-1'>Password</th>
               <th className='py-1'>Description</th>
+              {logged && <th className='py-1 pr-2'>Action</th>}
             </tr>
 
-            {ssid && ssid.map(wifi=>{
+            {allSSID && allSSID.map(wifi=>{
               if(wifi.branch == branch){
                 ssidData.push(wifi)
                 console.log(wifi)
@@ -60,13 +70,16 @@ function ShowSSID() {
                   <td className='p-1'>{wifi.ssid}</td>
                   <td className='p-1'>{logged ? wifi.password : "*******"}</td>
                   <td className='p-1'>{wifi.description}</td>
-                  <NavLink to={`/edit-ssid/${wifi._id}`}><div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
+                  {logged && <td className='p-2'>
+                      <div className='flex justify-center gap-3 text-lg'><NavLink to={`/edit-ssid/${wifi._id}`}><div className=' text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
+                      <button onClick={()=>handleDeleteSSID(wifi._id)}><div className=' text-slate-500 invisible group-hover:visible'><MdDeleteOutline/></div></button></div>
+                    </td>}
                 </tr>) 
               }
             })}
           </table>
             <div className='flex w-full gap-3 mb-3'>
-                {branches && <h2 className='text-2xl font-bold'>{(branches.find(e => e.branch_code == branch)).name}</h2>}
+                {allBranches && <h2 className='text-2xl font-bold'>{(allBranches.find(e => e.branch_code == branch)).name}</h2>}
                 <div className='bg-slate-700 flex-grow-0 flex items-center py-0.5 px-4 rounded-full '><CSVLink  data={ssidData} headers={ssidHeaders} filename={`${file}_ssids.csv`} className='flex gap-2 items-center'>Export <VscExport/></CSVLink ></div>
             </div>
           </div>})}

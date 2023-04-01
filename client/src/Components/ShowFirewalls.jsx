@@ -4,19 +4,12 @@ import FirewallCard from './FirewallCard'
 import {getAllFirewallDetails} from './../Utilities/api'
 import { CSVLink } from "react-csv";
 import { VscExport } from "react-icons/vsc";
+import { useSelector } from 'react-redux';
 
 function ShowFirewalls() {
-  const {branches} = useContext(DataContext)
-  const [firewalls, setFirewalls] = useState()
 
-  const getFirewalls = async ()=>{
-    const fw = await getAllFirewallDetails()
-    setFirewalls(fw)
-  }
-
-  useEffect(()=>{
-    getFirewalls()
-  },[])
+  const allBranches = useSelector(state => state.dashboardReducer.allBranches)
+  const allFirewalls= useSelector(state => state.dashboardReducer.allFirewalls)
 
   let file=''
   const fwHeaders = [
@@ -33,12 +26,12 @@ function ShowFirewalls() {
     <div className='w-full flex flex-col ml-64 mt-20'>
       <div className='w-11/12 mx-auto text-white flex flex-col gap-12 justify-center flex-wrap'>
         
-        {branches && branches.map(branch => {
+        {allBranches && allBranches.map(branch => {
           let fwData =[]
           return <div className='flex flex-col-reverse gap-3'>
             
             <div className='flex gap-8 flex-wrap'>  
-            {firewalls && firewalls.map(firewall =>  {
+            {allFirewalls && allFirewalls.map(firewall =>  {
               if(branch.branch_code == firewall.branch){
                 console.log(firewall.branch)
                 fwData.push(firewall)

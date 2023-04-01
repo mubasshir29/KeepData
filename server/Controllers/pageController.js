@@ -254,10 +254,10 @@ export const updateSwitch = async (req,res)=>{
 
 //Delete a switch DELETE
 export const deleteSwitch= async (req,res)=>{
-    //console.log("Data received at backend")
-    //console.log(req.body)
+    console.log("Data received at backend")
+    console.log(req.body)
     try{
-        const deleted = await switchModel.findByIdAndDelete(req.body._id)
+        const deleted = await switchModel.findByIdAndDelete(req.params.id)
         
         console.log("Switch deleted Successfully")
         res.status(200).json(deleted)
@@ -446,9 +446,9 @@ export const updateSSID= async (req,res)=>{
 //Delete a SSID DELETE
 export const deleteSSID= async (req,res)=>{
     //console.log("Data received at backend")
-    //console.log(req.body)
+    console.log("Delete request for",req.params.id)
     try{
-        const deleted = await ssidModel.findByIdAndDelete(req.body._id)
+        const deleted = await ssidModel.findByIdAndDelete(req.params.id)
         
         console.log("SSID deleted Successfully")
         res.status(200).json(deleted)

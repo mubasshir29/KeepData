@@ -40,14 +40,52 @@ import EditWLC from './Components/EditWLC';
 import EditSSID from './Components/EditSSID';
 import EditAP from './Components/EditAP';
 import ImportCSV from './Components/ImportCSV';
+import { setCount, addCount, setData } from './Redux/dashboardSlice';
+import {getAllBranches,getAllInternetDetails,getAllFirewallDetails,getAllWlcDetails,getAllSwitchDetails,getAllSSIDDetails,getAllAPDetails} from './Utilities/api.js'
+
 
 function App() {
   
   const logged = useSelector((state)=>state.loggedStatus)
   const username = useSelector((state)=>state.username)
+  const [branches,setBranches] = useState()
+  const dispatch = useDispatch()
+
+  const checkLogin = async ()=>{
+    const checkLogin = await checkLoginStatus()
+    console.log("Login: ",checkLogin)
+    if(checkLogin.isLogged){
+      dispatch(setLogin(checkLogin.user.user_name))
+    }
+  }
+
+  const getData = async ()=>{
+    const allBranches = await getAllBranches()
+    dispatch(setData({category: "branch", data: allBranches}))
+
+    const allInternet = await getAllInternetDetails()
+    dispatch(setData({category: "internet", data: allInternet}))
+
+    const allFirewalls = await getAllFirewallDetails()
+    dispatch(setData({category: "firewall", data: allFirewalls}))
+
+    const allSwitches = await getAllSwitchDetails()
+    dispatch(setData({category: "nswitch", data: allSwitches}))
+
+    const allWLC = await getAllWlcDetails()
+    dispatch(setData({category: "wlc", data: allWLC}))
+
+    const allSSID = await getAllSSIDDetails()
+    dispatch(setData({category: "ssid", data: allSSID}))
+
+    const allAPS = await getAllAPDetails()
+    dispatch(setData({category: "ap", data: allAPS}))
+  }
 
   useEffect(()=>{
-    
+    checkLogin()
+    getData()
+
   },[])
   return (
     <div className='min-w-full min-h-screen bg-slate-900'>
