@@ -43,10 +43,9 @@ import ImportCSV from './Components/ImportCSV';
 import { setCount, addCount, setData } from './Redux/dashboardSlice';
 import {getAllBranches,getAllInternetDetails,getAllFirewallDetails,getAllWlcDetails,getAllSwitchDetails,getAllSSIDDetails,getAllAPDetails} from './Utilities/api.js'
 
-
 function App() {
   
-  const logged = useSelector((state)=>state.loggedStatus)
+  const logged = useSelector((state)=>state.authReducer.loggedStatus)
   const username = useSelector((state)=>state.username)
   const [branches,setBranches] = useState()
   const dispatch = useDispatch()
@@ -60,26 +59,26 @@ function App() {
   }
 
   const getData = async ()=>{
-    const allBranches = await getAllBranches()
-    dispatch(setData({category: "branch", data: allBranches}))
+    // const allBranches = await getAllBranches()
+    // dispatch(setData({category: "branch", data: allBranches}))
 
-    const allInternet = await getAllInternetDetails()
-    dispatch(setData({category: "internet", data: allInternet}))
+    // const allInternet = await getAllInternetDetails()
+    // dispatch(setData({category: "internet", data: allInternet}))
 
-    const allFirewalls = await getAllFirewallDetails()
-    dispatch(setData({category: "firewall", data: allFirewalls}))
+    // const allFirewalls = await getAllFirewallDetails()
+    // dispatch(setData({category: "firewall", data: allFirewalls}))
 
-    const allSwitches = await getAllSwitchDetails()
-    dispatch(setData({category: "nswitch", data: allSwitches}))
+    // const allSwitches = await getAllSwitchDetails()
+    // dispatch(setData({category: "nswitch", data: allSwitches}))
 
-    const allWLC = await getAllWlcDetails()
-    dispatch(setData({category: "wlc", data: allWLC}))
+    // const allWLC = await getAllWlcDetails()
+    // dispatch(setData({category: "wlc", data: allWLC}))
 
-    const allSSID = await getAllSSIDDetails()
-    dispatch(setData({category: "ssid", data: allSSID}))
+    // const allSSID = await getAllSSIDDetails()
+    // dispatch(setData({category: "ssid", data: allSSID}))
 
-    const allAPS = await getAllAPDetails()
-    dispatch(setData({category: "ap", data: allAPS}))
+    // const allAPS = await getAllAPDetails()
+    // dispatch(setData({category: "ap", data: allAPS}))
   }
 
   useEffect(()=>{

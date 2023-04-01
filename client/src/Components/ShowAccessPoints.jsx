@@ -1,17 +1,21 @@
-import React,{ useState} from 'react'
+import React,{ useEffect, useState} from 'react'
 import { FaRegEdit,FaFileExport } from "react-icons/fa";
 import { CSVLink , CSVDownload } from "react-csv";
 import { VscExport } from "react-icons/vsc";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useFetcher } from 'react-router-dom';
 import { MdDeleteOutline } from "react-icons/md";
 import {deleteAP} from './../Utilities/api'
 import { useSelector, useDispatch } from 'react-redux'
+import {getAPData, getBranchData} from './../Redux/dataSlice.js'
 
 
 function ShowAccessPoints() {
+  const dispatch = useDispatch()
   const logged = useSelector((state)=>state.authReducer.loggedStatus)
-  const allBranches = useSelector(state => state.dashboardReducer.allBranches)
-  const allAPS= useSelector(state => state.dashboardReducer.allAPS)
+  const allBranches = useSelector(state => state.dataReducer.allBranches)
+  console.log("Branches",allBranches)
+  const allAPS= useSelector(state => state.dataReducer.allAPS)
+  console.log("APs",allAPS)
 
   //export to csv
   
@@ -46,8 +50,13 @@ function ShowAccessPoints() {
     console.log(id)
     const response = await deleteAP(id)
     console.log(response)
-    
+
   }
+  useEffect(()=>{
+    dispatch(getBranchData())
+    dispatch(getAPData())
+    
+  },[])
 
   return (
     <div className='w-full flex flex-col ml-64 mt-20'>
@@ -94,7 +103,7 @@ function ShowAccessPoints() {
             })}
           </table>
           <div className='flex w-full justify-between items-center'>
-            <h2 className='text-2xl font-bold mb-2'>{(allBranches.find(e => e.branch_code == branch)).name}</h2>
+           {allBranches && <h2 className='text-2xl font-bold mb-2'>{(allBranches.find(e => e.branch_code == branch)).name}</h2>}
             <div className='bg-slate-700 flex items-center py-0.5 px-4 rounded-full '><CSVLink  data={data} headers={headers} filename={`${file}_Access_Points.csv`} className='flex gap-2 items-center'>Export <VscExport/></CSVLink ></div>
           </div>
           </div>)

@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import InternetCard from './InternetCard'
 import { CSVLink } from "react-csv";
 import { VscExport } from "react-icons/vsc";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
+import {getInternetData, getBranchData} from './../Redux/dataSlice.js'
 
 function ShowInternet() {
-  const allBranches = useSelector(state => state.dashboardReducer.allBranches)
-  const allInternet= useSelector(state => state.dashboardReducer.allInternet)
+  const dispatch = useDispatch()
+  const allBranches = useSelector(state => state.dataReducer.allBranches)
+  const allInternet= useSelector(state => state.dataReducer.allInternet)
 
   let file=''
   const internetHeaders = [
@@ -18,6 +20,11 @@ function ShowInternet() {
     { label: "Bandwidth", key: "bandwidth" },
     { label: "Support", key: "support" }
   ]
+
+  useEffect(()=>{
+    dispatch(getBranchData())
+    dispatch(getInternetData())
+  },[])
   
   return (
     <div className='w-full flex flex-col ml-64 mt-20'>
