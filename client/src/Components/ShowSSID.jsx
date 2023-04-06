@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaRegEdit } from "react-icons/fa";
 import { CSVLink } from "react-csv";
@@ -6,11 +6,12 @@ import { VscExport } from "react-icons/vsc";
 import { NavLink } from 'react-router-dom';
 import { MdDeleteOutline } from "react-icons/md";
 import {deleteSSID} from './../Utilities/api.js'
+import {getSsidData, getBranchData} from './../Redux/dataSlice.js'
 
 function ShowSSID() {
-    
-    const allBranches = useSelector(state => state.dashboardReducer.allBranches)
-    const allSSID= useSelector(state => state.dashboardReducer.allSSID)
+    const dispatch = useDispatch()
+    const allBranches = useSelector(state => state.dataReducer.allBranches)
+    const allSSID= useSelector(state => state.dataReducer.allSSID)
     const logged = useSelector((state)=>state.authReducer.loggedStatus)
 
     let branchHasSSID = []
@@ -42,6 +43,11 @@ function ShowSSID() {
         const response = await deleteSSID(id)
         console.log(response)
       }
+
+      useEffect(()=>{
+        dispatch(getBranchData())
+        dispatch(getSsidData())
+      },[])
 
   return (
     <div className='w-full flex flex-col ml-64 mt-20'>

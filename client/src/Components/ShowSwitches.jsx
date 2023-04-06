@@ -1,13 +1,14 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import SwitchCard from './SwitchCard'
 import { CSVLink } from "react-csv";
 import { VscExport } from "react-icons/vsc";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
+import {getSwitchData, getBranchData} from './../Redux/dataSlice.js'
 
 function ShowSwitches() {
-  
-  const allBranches = useSelector(state => state.dashboardReducer.allBranches)
-  const allSwitches= useSelector(state => state.dashboardReducer.allSwitches)
+  const dispatch = useDispatch()
+  const allBranches = useSelector(state => state.dataReducer.allBranches)
+  const allSwitches= useSelector(state => state.dataReducer.allSwitches)
 
   
   let file=''
@@ -20,6 +21,12 @@ function ShowSwitches() {
     { label: "Software", key: "software" },
     { label: "Support", key: "support" }
   ]
+
+  useEffect(()=>{
+    dispatch(getBranchData())
+    dispatch(getSwitchData())
+  },[])
+
   return (
     <div className='w-full flex flex-col ml-64 mt-20'>
     <div className='w-11/12 mx-auto text-white flex flex-col gap-12 justify-center flex-wrap'>

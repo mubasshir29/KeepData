@@ -37,7 +37,7 @@ function ShowInternet() {
           <div className='flex gap-8 flex-wrap'>  
           {allInternet && allInternet.map(internet =>  {
             if(branch.branch_code == internet.branch){
-              console.log(internet.branch)
+              // console.log(internet.branch)
               internetData.push(internet)
                 file = internet.branch
               return (<div>

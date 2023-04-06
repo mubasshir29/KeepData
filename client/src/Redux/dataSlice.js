@@ -51,9 +51,7 @@ const dataSlice = createSlice({
         builder.addCase(getAPData.fulfilled, (state,action) =>{
             state.allAPS = action.payload
         })
-        
     }
-
 })
 
 export const {} = dataSlice.actions

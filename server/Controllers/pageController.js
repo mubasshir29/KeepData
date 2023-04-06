@@ -21,7 +21,7 @@ export const addBranch = async (req,res)=>{
     try{
         const newBranch = branchModel(req.body)
         await newBranch.save()
-        console.log("New branch added Successfully")
+        //console.log("New branch added Successfully")
         res.status(200).json(newBranch)
     }
     catch(error){
@@ -34,10 +34,10 @@ export const getBranchDetails = async (req,res)=>{
     try{
         if(req.params.id){
             const id = req.params.id
-            console.log("ID",id)
+            //console.log("ID",id)
             const foundBranch = await branchModel.findOne({_id:id})
             res.status(200).json(foundBranch)
-            console.log(foundBranch)
+            //console.log(foundBranch)
         }
         else{
             const foundBranch = await branchModel.find()
@@ -54,7 +54,7 @@ export const getBranchDetails = async (req,res)=>{
 export const updateBranch = async (req,res)=>{
     try{
         const updated = await branchModel.findByIdAndUpdate(req.body._id, req.body)
-        console.log("Branch updated successfully", updated)
+        //console.log("Branch updated successfully", updated)
         res.status(200).json({"msg":"Branch updated Successfully"})
     }
     catch(e){
@@ -66,7 +66,7 @@ export const updateBranch = async (req,res)=>{
 export const deleteBranch = async (req,res)=>{
     try{
         const deleted = await branchModel.findByIdAndDelete(req.body._id)
-        console.log("Branch deleted successfully", deleted)
+        //console.log("Branch deleted successfully", deleted)
         res.status(200).json({"msg":"Branch deleted Successfully"})
     }
     catch(e){
@@ -76,12 +76,12 @@ export const deleteBranch = async (req,res)=>{
 
 //Add internet connection CREATE
 export const addInternetConnection = async (req,res)=>{
-    console.log("Data received at backend")
-    console.log(req.body)
+    // console.log("Data received at backend")
+    // console.log(req.body)
     try{
         const newConnection = internetConnectionModel(req.body)
         await newConnection.save()
-        console.log("New Connection added Successfully")
+        // console.log("New Connection added Successfully")
         res.status(200).json(newConnection)
     }
     catch(error){
@@ -91,12 +91,12 @@ export const addInternetConnection = async (req,res)=>{
 
 //Getting Internet details READ
 export const getInternetDetails = async (req,res)=>{
-    console.log("Request for internet details")
-    console.log(req.params.id)
+    // console.log("Request for internet details")
+    // console.log(req.params.id)
     try{
         if(req.params.id){
             const foundInternet = await internetConnectionModel.findOne({_id:req.params.id})
-            console.log(foundInternet)
+            // console.log(foundInternet)
             res.status(200).json(foundInternet)
         }
         else{
@@ -112,11 +112,11 @@ export const getInternetDetails = async (req,res)=>{
 }
 //Update internet connection UPDATE
 export const updateInternetConnection = async (req,res)=>{
-    console.log("Data received at backend")
-    console.log(req.body)
+    // console.log("Data received at backend")
+    // console.log(req.body)
     try{
         const updated = await internetConnectionModel.findByIdAndUpdate(req.body._id, req.body)
-        console.log("Connection updated Successfully")
+        // console.log("Connection updated Successfully")
         res.status(200).json(updated)
     }
     catch(error){
@@ -125,11 +125,11 @@ export const updateInternetConnection = async (req,res)=>{
 }
 //Delete internet connection DELETE
 export const deleteInternetConnection = async (req,res)=>{
-    console.log("Data received at backend")
-    console.log(req.body)
+    // console.log("Data received at backend")
+    // console.log(req.body)
     try{
         const deleted = await internetConnectionModel.findByIdAndDelete(req.body._id)
-        console.log("Connection deleted Successfully")
+        // console.log("Connection deleted Successfully")
         res.status(200).json(deleted)
     }
     catch(error){
@@ -144,7 +144,7 @@ export const addFirewall = async (req,res)=>{
     try{
         const newFirewall = firewallModel(req.body)
         await newFirewall.save()
-        console.log("New Firewall added Successfully")
+        // console.log("New Firewall added Successfully")
         res.status(200).json(newFirewall)
     }
     catch(error){
@@ -153,13 +153,13 @@ export const addFirewall = async (req,res)=>{
 }
 //Getting firewall info READ
 export const getFirewallDetails = async (req,res)=>{
-    //console.log("Request for Firewall details")
+    console.log("Request for Firewall details")
     try{
         if(req.params.id){
             const id = req.params.id
-            console.log("Request for ID",req.params.id)
+            // console.log("Request for ID",req.params.id)
             const requested = await firewallModel.findOne({_id:id})
-            console.log(requested)
+            // console.log(requested)
             res.status(200).json(requested)
         }
         else{
@@ -175,12 +175,12 @@ export const getFirewallDetails = async (req,res)=>{
 }
 //Update a firewall UPDATE
 export const updateFirewall = async (req,res)=>{
-    console.log("Data received at backend")
-    console.log(req.body)
+    // console.log("Data received at backend")
+    // console.log(req.body)
     try{
         const updated = await firewallModel.findByIdAndUpdate(req.body._id, req.body)
         
-        console.log("Firewall updated Successfully")
+        // console.log("Firewall updated Successfully")
         res.status(200).json(updated)
     }
     catch(error){
@@ -195,7 +195,7 @@ export const deleteFirewall = async (req,res)=>{
     try{
         const deleted = await firewallModel.findByIdAndDelete(req.body._id)
         
-        console.log("Firewall deleted Successfully")
+        // console.log("Firewall deleted Successfully")
         res.status(200).json(deleted)
     }
     catch(error){
@@ -205,12 +205,12 @@ export const deleteFirewall = async (req,res)=>{
 
 //Adding a Switch CREATE
 export const addSwitch = async (req,res)=>{
-    console.log("Data received at backend")
-    console.log(req.body)
+    // console.log("Data received at backend")
+    // console.log(req.body)
     try{
         const newSwitch = switchModel(req.body)
         await newSwitch.save()
-        console.log("New Switch added Successfully")
+        // console.log("New Switch added Successfully")
         res.status(200).json(newSwitch)
     }
     catch(error){
@@ -240,11 +240,11 @@ export const getSwitchDetails = async (req,res)=>{
 
 //Update a switch UPDATE
 export const updateSwitch = async (req,res)=>{
-    console.log("Data received at backend")
-    console.log("Req body",req.body)
+    // console.log("Data received at backend")
+    // console.log("Req body",req.body)
     try{
         const updated = await switchModel.findByIdAndUpdate(req.body._id, req.body)
-        console.log("Switch found", updated)
+        // console.log("Switch found", updated)
         res.status(200).json(updated)
     }
     catch(error){
@@ -254,12 +254,12 @@ export const updateSwitch = async (req,res)=>{
 
 //Delete a switch DELETE
 export const deleteSwitch= async (req,res)=>{
-    console.log("Data received at backend")
-    console.log(req.body)
+    // console.log("Data received at backend")
+    // console.log(req.body)
     try{
         const deleted = await switchModel.findByIdAndDelete(req.params.id)
         
-        console.log("Switch deleted Successfully")
+        // console.log("Switch deleted Successfully")
         res.status(200).json(deleted)
     }
     catch(error){
@@ -268,12 +268,12 @@ export const deleteSwitch= async (req,res)=>{
 }
 
 export const addWLC = async (req,res)=>{
-    console.log("Data received at backend")
+    // console.log("Data received at backend")
     //console.log(req.body)
     try{
         const newWLC = wlcModel(req.body)
         await newWLC.save()
-        console.log("New WLC added Successfully")
+        // console.log("New WLC added Successfully")
         res.status(200).json(newWLC)
     }
     catch(error){
@@ -281,18 +281,18 @@ export const addWLC = async (req,res)=>{
     }
 }
 export const getWLCDetails = async (req,res)=>{
-    console.log("Request for Controller details")
+    // console.log("Request for Controller details")
     try{
         if(req.params.id){
             const id = req.params.id
             const controller = await wlcModel.findOne({_id:id})
-            console.log("FoundController",controller)
+            // console.log("FoundController",controller)
             res.status(200).json(controller)
         }
         else{
             const controllers = await wlcModel.find()
-            console.log("Request received at backend")
-            console.log(controllers)
+            // console.log("Request received at backend")
+            // console.log(controllers)
             res.status(200).json(controllers)
         }
     }
@@ -302,12 +302,12 @@ export const getWLCDetails = async (req,res)=>{
 }
 //Update a WLC UPDATE
 export const updateWLC = async (req,res)=>{
-    console.log("Data received at backend")
-    console.log(req.body)
+    // console.log("Data received at backend")
+    // console.log(req.body)
     try{
         const updated = await wlcModel.findByIdAndUpdate(req.body._id, req.body)
         
-        console.log("Controller updated Successfully")
+        // console.log("Controller updated Successfully")
         res.status(200).json(updated)
     }
     catch(error){
@@ -322,7 +322,7 @@ export const deleteWLC= async (req,res)=>{
     try{
         const deleted = await wlcModel.findByIdAndDelete(req.body._id)
         
-        console.log("Switch deleted Successfully")
+        // console.log("Switch deleted Successfully")
         res.status(200).json(deleted)
     }
     catch(error){
@@ -331,12 +331,12 @@ export const deleteWLC= async (req,res)=>{
 }
 
 export const addAP = async (req,res)=>{
-    console.log("Data received at backend")
-    console.log(req.body)
+    // console.log("Data received at backend")
+    // console.log(req.body)
     try{
         const newAP = apModel(req.body)
         await newAP.save()
-        console.log("New AP added Successfully")
+        // console.log("New AP added Successfully")
         res.status(200).json(newAP)
     }
     catch(error){
@@ -344,18 +344,18 @@ export const addAP = async (req,res)=>{
     }
 }
 export const getAPDetails = async (req,res)=>{
-    console.log("Request for AP details")
+    // console.log("Request for AP details")
     try{
         if(req.params.id){
             const id = req.params.id
             const requested = await apModel.findOne({_id:id})
-            console.log(requested)
+            // console.log(requested)
             res.status(200).json(requested)
         }
         else{
             const aps = await apModel.find()
-            console.log("Request received at backend")
-            console.log(aps)
+            // console.log("Request received at backend")
+            // console.log(aps)
             res.status(200).json(aps)
         }
     }
@@ -365,12 +365,12 @@ export const getAPDetails = async (req,res)=>{
 }
 //Update a AP UPDATE
 export const updateAP = async (req,res)=>{
-    console.log("Data received at backend")
-    console.log(req.body)
+    // console.log("Data received at backend")
+    // console.log(req.body)
     try{
         const updated = await apModel.findByIdAndUpdate(req.body._id,req.body)
         
-        console.log("AP updated Successfully")
+        // console.log("AP updated Successfully")
         res.status(200).json(updated)
     }
     catch(error){
@@ -380,12 +380,12 @@ export const updateAP = async (req,res)=>{
 
 //Delete a AP DELETE
 export const deleteAP= async (req,res)=>{
-    console.log("Data received at backend")
-    console.log(req.params.id)
+    // console.log("Data received at backend")
+    // console.log(req.params.id)
     try{
         const deleted = await apModel.findByIdAndDelete(req.params.id)
         
-        console.log("AP deleted Successfully")
+        // console.log("AP deleted Successfully")
         res.status(200).json(deleted)
     }
     catch(error){
@@ -394,12 +394,12 @@ export const deleteAP= async (req,res)=>{
 }
 
 export const addSSID = async (req,res)=>{
-    console.log("Data received at backend")
-    console.log(req.body)
+    // console.log("Data received at backend")
+    // console.log(req.body)
     try{
         const newSSID = ssidModel(req.body)
         await newSSID.save()
-        console.log("New SSID added Successfully")
+        // console.log("New SSID added Successfully")
         res.status(200).json(newSSID)
     }
     catch(error){
@@ -407,7 +407,7 @@ export const addSSID = async (req,res)=>{
     }
 }
 export const getSSIDDetails = async (req,res)=>{
-    console.log("Request for SSID details", req.params.id)
+    // console.log("Request for SSID details", req.params.id)
     try{
         if(req.params.id){
             const id = req.params.id
@@ -416,8 +416,8 @@ export const getSSIDDetails = async (req,res)=>{
         }
         else{
             const ssids = await ssidModel.find()
-            console.log("Request received at backend")
-            console.log(getSSIDDetails)
+            // console.log("Request received at backend")
+            // console.log(getSSIDDetails)
             res.status(200).json(ssids)
         }
     }
@@ -428,13 +428,13 @@ export const getSSIDDetails = async (req,res)=>{
 //Update a SSID UPDATE
 export const updateSSID= async (req,res)=>{
     //console.log("Data received at backend")
-    console.log("Request for",req.body.id)
+    // console.log("Request for",req.body.id)
     try{
-        console.log("Trying to find in DB")
+        // console.log("Trying to find in DB")
         const updated = await ssidModel.findByIdAndUpdate(req.body._id, req.body)
         console.log(updated)
         if(updated){
-            console.log("SSID updated Successfully")
+            // console.log("SSID updated Successfully")
             res.status(200).json(updated)
         }
     }
@@ -446,11 +446,11 @@ export const updateSSID= async (req,res)=>{
 //Delete a SSID DELETE
 export const deleteSSID= async (req,res)=>{
     //console.log("Data received at backend")
-    console.log("Delete request for",req.params.id)
+    // console.log("Delete request for",req.params.id)
     try{
         const deleted = await ssidModel.findByIdAndDelete(req.params.id)
         
-        console.log("SSID deleted Successfully")
+        // console.log("SSID deleted Successfully")
         res.status(200).json(deleted)
     }
     catch(error){

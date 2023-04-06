@@ -1,15 +1,16 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaRegEdit } from "react-icons/fa";
 import { CSVLink } from "react-csv";
 import { VscExport } from "react-icons/vsc";
 import { NavLink } from 'react-router-dom';
+import {getWlcData, getBranchData} from './../Redux/dataSlice.js'
 
 
 function ShowWirelessControllers() {
-  
-  const allBranches = useSelector(state => state.dashboardReducer.allBranches)
-  const allWLC= useSelector(state => state.dashboardReducer.allWLC)
+  const dispatch = useDispatch()
+  const allBranches = useSelector(state => state.dataReducer.allBranches)
+  const allWLC= useSelector(state => state.dataReducer.allWLC)
 
   let branchHasWLC = []
   if(allWLC){
@@ -46,11 +47,15 @@ function ShowWirelessControllers() {
     { label: "Description", key: "description" }
   ]
 
- 
-
   let file=''
   
   let wlcData =[]
+
+  useEffect(()=>{
+    dispatch(getBranchData())
+    dispatch(getWlcData())
+  },[])
+
 
   return (
     <div className='w-full flex flex-col ml-64 mt-20'>

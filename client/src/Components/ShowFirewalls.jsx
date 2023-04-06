@@ -4,12 +4,15 @@ import FirewallCard from './FirewallCard'
 import {getAllFirewallDetails} from './../Utilities/api'
 import { CSVLink } from "react-csv";
 import { VscExport } from "react-icons/vsc";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'
+import {getFirewallData, getBranchData} from './../Redux/dataSlice.js'
 
 function ShowFirewalls() {
+  const dispatch = useDispatch()
+  const allBranches = useSelector(state => state.dataReducer.allBranches)
+  const allFirewalls= useSelector(state => state.dataReducer.allFirewalls)
 
-  const allBranches = useSelector(state => state.dashboardReducer.allBranches)
-  const allFirewalls= useSelector(state => state.dashboardReducer.allFirewalls)
+  console.log("All Branches",allBranches)
 
   let file=''
   const fwHeaders = [
@@ -21,6 +24,11 @@ function ShowFirewalls() {
     { label: "Software", key: "software" },
     { label: "Support", key: "support" }
   ]
+
+  useEffect(()=>{
+    dispatch(getBranchData())
+    dispatch(getFirewallData())
+  },[])
 
   return (
     <div className='w-full flex flex-col ml-64 mt-20'>
