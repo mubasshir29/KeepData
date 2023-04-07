@@ -7,6 +7,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import {deleteAP} from './../Utilities/api'
 import { useSelector, useDispatch } from 'react-redux'
 import {getAPData, getBranchData,delAPData} from './../Redux/dataSlice.js'
+import ConfirmPage from './ConfirmPage';
 
 
 function ShowAccessPoints() {
@@ -48,8 +49,8 @@ function ShowAccessPoints() {
 
   const handleDeleteAP = async (id)=>{
     console.log(id)
-    //const response = await deleteAP(id)
     dispatch(delAPData(id))
+    
     //console.log(response)
 
   }
