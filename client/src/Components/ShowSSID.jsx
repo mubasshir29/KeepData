@@ -6,7 +6,7 @@ import { VscExport } from "react-icons/vsc";
 import { NavLink } from 'react-router-dom';
 import { MdDeleteOutline } from "react-icons/md";
 import {deleteSSID} from './../Utilities/api.js'
-import {getSsidData, getBranchData} from './../Redux/dataSlice.js'
+import {getSsidData, getBranchData,delSsidData} from './../Redux/dataSlice.js'
 
 function ShowSSID() {
     const dispatch = useDispatch()
@@ -40,8 +40,9 @@ function ShowSSID() {
 
       const handleDeleteSSID = async (id)=>{
         console.log(id)
-        const response = await deleteSSID(id)
-        console.log(response)
+        //const response = await deleteSSID(id)
+        dispatch(delSsidData(id))
+        //console.log(response)
       }
 
       useEffect(()=>{

@@ -8,17 +8,15 @@ import { MdRouter,MdSettings } from "react-icons/md";
 import DashboardCard from './DashboardCard';
 import { useSelector } from 'react-redux';
 
-
-
 function Home() {
 
-    const allBranches = useSelector(state => state.dashboardReducer.allBranches)
-    const allInternet= useSelector(state => state.dashboardReducer.allInternet)
-    const allFirewalls= useSelector(state => state.dashboardReducer.allFirewalls)
-    const allSwitches= useSelector(state => state.dashboardReducer.allSwitches)
-    const allWLC= useSelector(state => state.dashboardReducer.allWLC)
-    const allSSID= useSelector(state => state.dashboardReducer.allSSID)
-    const allAPS= useSelector(state => state.dashboardReducer.allAPS)
+    const allBranches = useSelector(state => state.dataReducer.allBranches)
+    const allInternet= useSelector(state => state.dataReducer.allInternet)
+    const allFirewalls= useSelector(state => state.dataReducer.allFirewalls)
+    const allSwitches= useSelector(state => state.dataReducer.allSwitches)
+    const allWLC= useSelector(state => state.dataReducer.allWLC)
+    const allSSID= useSelector(state => state.dataReducer.allSSID)
+    const allAPS= useSelector(state => state.dataReducer.allAPS)
 
   return (
     <div className='w-full flex flex-col ml-64 mt-20'>

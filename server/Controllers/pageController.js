@@ -65,9 +65,10 @@ export const updateBranch = async (req,res)=>{
 //Update a branch DELETE operation
 export const deleteBranch = async (req,res)=>{
     try{
-        const deleted = await branchModel.findByIdAndDelete(req.body._id)
-        //console.log("Branch deleted successfully", deleted)
-        res.status(200).json({"msg":"Branch deleted Successfully"})
+        const deleted = await branchModel.findByIdAndDelete(req.params.id)
+        console.log("Branch deleted successfully", deleted)
+        const allbranches = await branchModel.find()
+        res.status(200).json(allbranches)
     }
     catch(e){
         res.status(400).json({"msg": "Delete failed"})
@@ -128,9 +129,10 @@ export const deleteInternetConnection = async (req,res)=>{
     // console.log("Data received at backend")
     // console.log(req.body)
     try{
-        const deleted = await internetConnectionModel.findByIdAndDelete(req.body._id)
+        const deleted = await internetConnectionModel.findByIdAndDelete(req.params.id)
         // console.log("Connection deleted Successfully")
-        res.status(200).json(deleted)
+        const otherInternet = await internetConnectionModel.find()
+        res.status(200).json(otherInternet)
     }
     catch(error){
         res.status(400).json({"msg": "Delete failed"})
@@ -193,10 +195,10 @@ export const deleteFirewall = async (req,res)=>{
     //console.log("Data received at backend")
     //console.log(req.body)
     try{
-        const deleted = await firewallModel.findByIdAndDelete(req.body._id)
-        
-        // console.log("Firewall deleted Successfully")
-        res.status(200).json(deleted)
+        const deleted = await firewallModel.findByIdAndDelete(req.params.id)
+        console.log("Firewall deleted Successfully", deleted)
+        const firewalls = await firewallModel.find()
+        res.status(200).json(firewalls)
     }
     catch(error){
         res.status(400).json({"msg": "Delete failed"})
@@ -258,9 +260,9 @@ export const deleteSwitch= async (req,res)=>{
     // console.log(req.body)
     try{
         const deleted = await switchModel.findByIdAndDelete(req.params.id)
-        
         // console.log("Switch deleted Successfully")
-        res.status(200).json(deleted)
+        const switches = await switchModel.find()
+        res.status(200).json(switches)
     }
     catch(error){
         res.status(400).json({"msg": "Delete failed"})
@@ -320,10 +322,10 @@ export const deleteWLC= async (req,res)=>{
     //console.log("Data received at backend")
     //console.log(req.body)
     try{
-        const deleted = await wlcModel.findByIdAndDelete(req.body._id)
-        
+        const deleted = await wlcModel.findByIdAndDelete(req.params.id)
         // console.log("Switch deleted Successfully")
-        res.status(200).json(deleted)
+        const controllers = await wlcModel.find()
+        res.status(200).json(controllers)
     }
     catch(error){
         res.status(400).json({"msg": "Delete failed"})
@@ -384,9 +386,9 @@ export const deleteAP= async (req,res)=>{
     // console.log(req.params.id)
     try{
         const deleted = await apModel.findByIdAndDelete(req.params.id)
-        
-        // console.log("AP deleted Successfully")
-        res.status(200).json(deleted)
+        console.log("AP deleted Successfully", deleted)
+        const aps = await apModel.find()
+        res.status(200).json(aps)
     }
     catch(error){
         res.status(400).json({"msg": "Delete failed"})
@@ -449,9 +451,9 @@ export const deleteSSID= async (req,res)=>{
     // console.log("Delete request for",req.params.id)
     try{
         const deleted = await ssidModel.findByIdAndDelete(req.params.id)
-        
         // console.log("SSID deleted Successfully")
-        res.status(200).json(deleted)
+        const ssids = await ssidModel.find()
+        res.status(200).json(ssids)
     }
     catch(error){
         res.status(400).json({"msg": "Delete failed"})

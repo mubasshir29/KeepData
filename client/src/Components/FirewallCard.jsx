@@ -1,12 +1,27 @@
 import React from 'react'
 import { FaRegEdit } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import {delFirewallData} from './../Redux/dataSlice.js'
+import { MdDeleteOutline } from "react-icons/md";
 
 function FirewallCard({firewall}) {
     //console.log(firewall)
+    const logged = useSelector((state)=>state.authReducer.loggedStatus)
+    const dispatch = useDispatch()
+
+    const handleDeleteBranch = async (id)=>{
+        console.log(id)
+        //const response = await deleteAP(id)
+        dispatch(delFirewallData(id))
+        //console.log(response)
+      }
   return (
     <div className='bg-slate-700 w-[540px] rounded-xl relative group'>
-        <NavLink to={`/edit-firewall/${firewall._id}`}><div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
+        {logged && <div className='absolute invisible group-hover:visible top-2 right-0 w-12 flex gap-1 text-lg text-gray-500 items-center'>
+            <NavLink to={`/edit-firewall/${firewall._id}`}><FaRegEdit/></NavLink>
+            <button onClick={()=>handleDeleteBranch(firewall._id)}><MdDeleteOutline/></button>
+            </div>}
         <table className='w-full mx-auto text-left'>
             <tr>
                 <th className='pl-8 pt-3 pb-1 bg-indigo-500 rounded-tl-xl  font-semibold'>Branch</th>

@@ -4,14 +4,18 @@ import { NavLink } from 'react-router-dom';
 import { MdDeleteOutline } from "react-icons/md";
 import { useSelector, useDispatch } from 'react-redux'
 import {deleteSwitch} from './../Utilities/api.js'
+import {delSwitchData} from './../Redux/dataSlice.js'
 
 
 function SwitchCard({device}) {
     const logged = useSelector((state)=>state.authReducer.loggedStatus)
+    const dispatch = useDispatch()
+
     const handleDeleteSwitch = async (id)=>{
         console.log(id)
-        const response = await deleteSwitch(id)
-        console.log(response)
+        //const response = await deleteSwitch(id)
+        dispatch(delSwitchData(id))
+        //console.log(response)
     }
   return (
     <div className='relative group bg-slate-700 w-[540px] rounded-xl'>

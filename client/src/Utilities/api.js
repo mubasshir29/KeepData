@@ -5,8 +5,9 @@ const server = "http://localhost:9500"
 export const addBranch = async (branch)=>{
     console.log("From API",branch)
     try{
-        await axios.post(`${server}/new/branch`,branch)
+        const result = await axios.post(`${server}/new/branch`,branch)
         //console.log("Data sent")
+        return result
     }
     catch(error){
         console.log("Error in sending data",error)
@@ -49,12 +50,12 @@ export const updateBranch = async (branch)=>{
     }
 }
 //deleting a branch
-export const deleteBranch = async (branch)=>{
-    console.log("From API",branch)
+export const deleteBranch = async (id)=>{
+    console.log("From Delete Branch API",id)
 
     try{
-        const response = await axios.delete(`${server}/delete/branch`,branch)
-        return response
+        const response = await axios.delete(`${server}/delete/branch/${id}`)
+        return response.data
     }
     catch(error){
         console.log("Error in sending data",error)
@@ -113,12 +114,12 @@ export const updateInternetConnection = async (connection)=>{
     }
 }
 //delete internet
-export const deleteInternetConnection = async (connection)=>{
+export const deleteInternetConnection = async (id)=>{
     try{
-        const response = await axios.delete(`${server}/edit/internet`,connection)
+        const response = await axios.delete(`${server}/delete/internet/${id}`)
         console.log("Response received", response.status)
         console.log("In API",response.data)
-        return response;
+        return response.data;
     }
     catch(error){
         console.log("Error in getting data",error)
@@ -181,9 +182,9 @@ export const updateFirewall = async (firewall)=>{
     }
 }
 //delete firewall details
-export const deleteFirewall = async (firewall)=>{
+export const deleteFirewall = async (id)=>{
     try{
-        const response = await axios.delete(`${server}/firewall/delete`, firewall)
+        const response = await axios.delete(`${server}/delete/firewall/${id}`)
         // console.log("Getting firewall details from backend")
         //console.log("Firewall Data received", response.data)
         return response.data
@@ -314,9 +315,9 @@ export const updateWLC = async (wlc)=>{
     }
 }
 //delete firewall details
-export const deleteWLC= async (wlc)=>{
+export const deleteWLC= async (id)=>{
     try{
-        const response = await axios.delete(`${server}/wlc/delete`, wlc)
+        const response = await axios.delete(`${server}/delete/wlc/${id}`)
         // console.log("Getting firewall details from backend")
         //console.log("Firewall Data received", response.data)
         return response.data
@@ -383,7 +384,7 @@ export const deleteAP = async (id)=>{
     try{
         const response = await axios.delete(`${server}/delete/ap/${id}`)
         // console.log("Getting firewall details from backend")
-        //console.log("Firewall Data received", response.data)
+        console.log("Firewall Data received after deleting", response.data)
         return response.data
     }
     catch(error){
@@ -495,6 +496,7 @@ export const checkLoginStatus = async ()=>{
         return loginStatus.data
     }
     catch(error){
-        console.log(error)
+        //console.log(error)
+        return error.data
     }
 }

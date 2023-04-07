@@ -40,8 +40,7 @@ import EditWLC from './Components/EditWLC';
 import EditSSID from './Components/EditSSID';
 import EditAP from './Components/EditAP';
 import ImportCSV from './Components/ImportCSV';
-import { setCount, addCount, setData } from './Redux/dashboardSlice';
-import {getAllBranches,getAllInternetDetails,getAllFirewallDetails,getAllWlcDetails,getAllSwitchDetails,getAllSSIDDetails,getAllAPDetails} from './Utilities/api.js'
+import {getBranchData,getInternetData,getFirewallData,getSwitchData,getWlcData,getSsidData,getAPData} from './Redux/dataSlice'
 
 function App() {
   
@@ -51,39 +50,22 @@ function App() {
   const dispatch = useDispatch()
 
   const checkLogin = async ()=>{
-    const checkLogin = await checkLoginStatus()
-    console.log("Login: ",checkLogin)
-    if(checkLogin.isLogged){
+    const check = await checkLoginStatus()
+    //console.log("Login: ",check)
+    if(check?.isLogged){
       dispatch(setLogin(checkLogin.user.user_name))
     }
   }
 
-  const getData = async ()=>{
-    // const allBranches = await getAllBranches()
-    // dispatch(setData({category: "branch", data: allBranches}))
-
-    // const allInternet = await getAllInternetDetails()
-    // dispatch(setData({category: "internet", data: allInternet}))
-
-    // const allFirewalls = await getAllFirewallDetails()
-    // dispatch(setData({category: "firewall", data: allFirewalls}))
-
-    // const allSwitches = await getAllSwitchDetails()
-    // dispatch(setData({category: "nswitch", data: allSwitches}))
-
-    // const allWLC = await getAllWlcDetails()
-    // dispatch(setData({category: "wlc", data: allWLC}))
-
-    // const allSSID = await getAllSSIDDetails()
-    // dispatch(setData({category: "ssid", data: allSSID}))
-
-    // const allAPS = await getAllAPDetails()
-    // dispatch(setData({category: "ap", data: allAPS}))
-  }
-
   useEffect(()=>{
+    dispatch(getBranchData())
+    dispatch(getInternetData())
+    dispatch(getFirewallData())
+    dispatch(getSwitchData())
+    dispatch(getWlcData())
+    dispatch(getSsidData())
+    dispatch(getAPData())
     checkLogin()
-    getData()
 
   },[])
   return (

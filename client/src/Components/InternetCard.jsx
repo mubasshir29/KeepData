@@ -1,12 +1,28 @@
 import React from 'react'
 import { FaRegEdit } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
+import {delInternetData} from './../Redux/dataSlice.js'
+import { MdDeleteOutline } from "react-icons/md";
 
 function InternetCard({internet}) {
      //console.log("Connection:",internet)
+     const logged = useSelector((state)=>state.authReducer.loggedStatus)
+    const dispatch = useDispatch()
+
+    const handleDeleteBranch = async (id)=>{
+        console.log(id)
+        //const response = await deleteAP(id)
+        dispatch(delInternetData(id))
+        //console.log(response)
+      }
+
   return (
     <div className='bg-slate-700 w-[540px] rounded-xl relative group '>
-        <NavLink to={`/edit-internet/${internet._id}`} ><div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
+        {logged && <div className='absolute invisible group-hover:visible top-2 right-0 w-12 flex gap-1 text-lg text-gray-500 items-center'>
+            <NavLink to={`/edit-internet/${internet._id}`}><FaRegEdit/></NavLink>
+            <button onClick={()=>handleDeleteBranch(internet._id)}><MdDeleteOutline/></button>
+            </div>}
         <table className='w-full mx-auto text-left'>
             <tr> 
                 <th className='pl-8 py-1 rounded-tl-xl bg-indigo-500 w-1/3 font-semibold'>Branch</th>

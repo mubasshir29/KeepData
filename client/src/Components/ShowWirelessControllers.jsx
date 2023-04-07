@@ -4,13 +4,16 @@ import { FaRegEdit } from "react-icons/fa";
 import { CSVLink } from "react-csv";
 import { VscExport } from "react-icons/vsc";
 import { NavLink } from 'react-router-dom';
-import {getWlcData, getBranchData} from './../Redux/dataSlice.js'
+import {getWlcData, getBranchData,delWlcData} from './../Redux/dataSlice.js'
+import { MdDeleteOutline } from "react-icons/md";
 
 
 function ShowWirelessControllers() {
   const dispatch = useDispatch()
   const allBranches = useSelector(state => state.dataReducer.allBranches)
   const allWLC= useSelector(state => state.dataReducer.allWLC)
+  const logged = useSelector((state)=>state.authReducer.loggedStatus)
+
 
   let branchHasWLC = []
   if(allWLC){
@@ -51,6 +54,13 @@ function ShowWirelessControllers() {
   
   let wlcData =[]
 
+  const handleDeleteWLC = async (id)=>{
+    console.log(id)
+    //const response = await deleteSSID(id)
+    dispatch(delWlcData(id))
+    //console.log(response)
+  }
+
   useEffect(()=>{
     dispatch(getBranchData())
     dispatch(getWlcData())
@@ -74,6 +84,7 @@ function ShowWirelessControllers() {
                   <th className='py-1 '>IP</th>
                   <th className='py-1 '>Software</th>
                   <th className='py-1 '>Support</th>
+                  {logged && <th className='py-1 pr-2'>Action</th>}
                 </tr>
                 {allWLC && allWLC.map(controller =>{
                   if(branch == controller.branch){
@@ -87,7 +98,10 @@ function ShowWirelessControllers() {
                       <td className='py-1'>{controller.management_ip}</td>
                       <td className='py-1'>{controller.software}</td>
                       <td className='py-1'>{controller.support}</td>
-                      <NavLink to={`/edit-wlc/${controller._id}`}><div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
+                      {logged && <td className='p-2'>
+                      <div className='flex justify-center gap-3 text-lg'><NavLink to={`/edit-wlc/${controller._id}`}><div className=' text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
+                      <button onClick={()=>handleDeleteWLC(controller._id)}><div className=' text-slate-500 invisible group-hover:visible'><MdDeleteOutline/></div></button></div>
+                      </td>}
                     </tr>)
                   }
                   })

@@ -9,7 +9,7 @@ pageRouter.get('/branch',getBranchDetails)
 pageRouter.get('/branch/:id',getBranchDetails)
 pageRouter.post('/new/branch',addBranch)
 pageRouter.post('/edit/branch',updateBranch)
-pageRouter.post('/delete/branch',deleteBranch)
+pageRouter.delete('/delete/branch/:id',deleteBranch)
 
 
 //Internet Routes
@@ -17,14 +17,14 @@ pageRouter.get('/internet',getInternetDetails)
 pageRouter.get('/internet/:id',getInternetDetails)
 pageRouter.post('/new/internet',addInternetConnection)
 pageRouter.post('/edit/internet',updateInternetConnection)
-pageRouter.post('/delete/internet',deleteInternetConnection)
+pageRouter.delete('/delete/internet/:id',deleteInternetConnection)
 
 //Firewall Routes
 pageRouter.get('/firewall',getFirewallDetails)
 pageRouter.get('/firewall/:id',getFirewallDetails)
 pageRouter.post('/new/firewall',addFirewall)
 pageRouter.post('/edit/firewall',updateFirewall)
-pageRouter.post('/delete/firewall',deleteFirewall)
+pageRouter.delete('/delete/firewall/:id',deleteFirewall)
 
 
 //Switch Routes
@@ -41,7 +41,7 @@ pageRouter.get('/wlc',getWLCDetails)
 pageRouter.get('/wlc/:id',getWLCDetails)
 pageRouter.post('/new/wlc',addWLC)
 pageRouter.post('/edit/wlc',updateWLC)
-pageRouter.post('/delete/wlc',deleteWLC)
+pageRouter.delete('/delete/wlc/:id',deleteWLC)
 
 
 //AP Routes

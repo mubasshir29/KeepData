@@ -2,13 +2,28 @@ import React from 'react'
 import logo from './../images/Instagram-Logo.png'
 import { FaRegEdit } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
-
+import { useSelector, useDispatch } from 'react-redux'
+import {delBranchData} from './../Redux/dataSlice.js'
+import { MdDeleteOutline } from "react-icons/md";
 
 function BranchCard({branch}) {
+    const logged = useSelector((state)=>state.authReducer.loggedStatus)
+    const dispatch = useDispatch()
     //console.log(branch)
+    
+    const handleDeleteBranch = async (id)=>{
+        console.log(id)
+        //const response = await deleteAP(id)
+        dispatch(delBranchData(id))
+        //console.log(response)
+      }
   return (
-    <div className='bg-slate-700 w-[480px] p-6 m-4 rounded-xl flex relative group'>
-        <NavLink to={`/edit-branch/${branch._id}`} ><div className='absolute top-2 right-2 text-slate-500 invisible group-hover:visible'><FaRegEdit/></div></NavLink>
+    <div className='bg-slate-700 w-[480px] p-8 m-4 rounded-xl flex relative group'>
+        {logged && <div className='absolute invisible group-hover:visible top-2 right-0 w-12 flex text-lg text-gray-500 items-center'>
+            <NavLink to={`/edit-branch/${branch._id}`}><FaRegEdit/></NavLink>
+            <button onClick={()=>handleDeleteBranch(branch._id)}><MdDeleteOutline/></button>
+            </div>}
+        
         <div className='flex w-ful gap-6'>
         <div className='flex flex-col w-3/4'>
             <div className=''>
