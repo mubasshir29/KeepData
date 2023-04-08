@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react'
+import React,{useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaRegEdit } from "react-icons/fa";
 import { CSVLink } from "react-csv";
@@ -6,6 +6,7 @@ import { VscExport } from "react-icons/vsc";
 import { NavLink } from 'react-router-dom';
 import {getWlcData, getBranchData,delWlcData} from './../Redux/dataSlice.js'
 import { MdDeleteOutline } from "react-icons/md";
+import ConfirmPage from './ConfirmPage.jsx';
 
 
 function ShowWirelessControllers() {
@@ -13,6 +14,9 @@ function ShowWirelessControllers() {
   const allBranches = useSelector(state => state.dataReducer.allBranches)
   const allWLC= useSelector(state => state.dataReducer.allWLC)
   const logged = useSelector((state)=>state.authReducer.loggedStatus)
+
+  const [showDialog, setShowDialog] = useState(false)
+  const [deleteID,setDeleteID] = useState()
 
 
   let branchHasWLC = []
@@ -57,7 +61,8 @@ function ShowWirelessControllers() {
   const handleDeleteWLC = async (id)=>{
     console.log(id)
     //const response = await deleteSSID(id)
-    dispatch(delWlcData(id))
+    setDeleteID(id)
+    setShowDialog(true)
     //console.log(response)
   }
 
@@ -117,6 +122,7 @@ function ShowWirelessControllers() {
         })}
         
       </div>
+      {showDialog && <ConfirmPage deleteCategory="wlc" deleteID={deleteID} setShowDialog={setShowDialog} />}
     </div>
   )
 }

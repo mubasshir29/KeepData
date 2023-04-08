@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { FaRegEdit } from "react-icons/fa";
 import { CSVLink } from "react-csv";
@@ -7,12 +7,16 @@ import { NavLink } from 'react-router-dom';
 import { MdDeleteOutline } from "react-icons/md";
 import {deleteSSID} from './../Utilities/api.js'
 import {getSsidData, getBranchData,delSsidData} from './../Redux/dataSlice.js'
+import ConfirmPage from './ConfirmPage.jsx';
 
 function ShowSSID() {
     const dispatch = useDispatch()
     const allBranches = useSelector(state => state.dataReducer.allBranches)
     const allSSID= useSelector(state => state.dataReducer.allSSID)
     const logged = useSelector((state)=>state.authReducer.loggedStatus)
+
+    const [showDialog, setShowDialog] = useState(false)
+    const [deleteID,setDeleteID] = useState()
 
     let branchHasSSID = []
     if(allSSID){
@@ -41,7 +45,8 @@ function ShowSSID() {
       const handleDeleteSSID = async (id)=>{
         console.log(id)
         //const response = await deleteSSID(id)
-        dispatch(delSsidData(id))
+        setDeleteID(id)
+        setShowDialog(true)
         //console.log(response)
       }
 
@@ -91,6 +96,7 @@ function ShowSSID() {
             </div>
           </div>})}
           </div>
+          {showDialog && <ConfirmPage deleteCategory="ssid" deleteID={deleteID} setShowDialog={setShowDialog} />}
           </div>
   )
 }

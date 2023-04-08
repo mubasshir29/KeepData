@@ -70,7 +70,7 @@ function ConfirmPage(props) {
       }
 
   return (
-    <div className='fixed left-0 top-0 w-full h-screen bg-slate-800/80 z-20 flex flex-col items-center justify-center bg-transparent' onClick={()=>{props.setShowDialog(false)}}>
+    <div className='fixed left-0 top-0 text-white w-full h-screen bg-slate-800/80 z-20 flex flex-col items-center justify-center bg-transparent' onClick={()=>{props.setShowDialog(false)}}>
         
         <div className='bg-slate-700 mx-auto w-96 rounded-2xl flex flex-col gap-6 p-8 items-center text-xl'>
             <h1 className=' text-center'>Are you sure you want to delete?</h1>

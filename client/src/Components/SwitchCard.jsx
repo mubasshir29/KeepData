@@ -1,20 +1,25 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { FaRegEdit } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { MdDeleteOutline } from "react-icons/md";
 import { useSelector, useDispatch } from 'react-redux'
 import {deleteSwitch} from './../Utilities/api.js'
 import {delSwitchData} from './../Redux/dataSlice.js'
+import ConfirmPage from './ConfirmPage.jsx';
 
 
 function SwitchCard({device}) {
     const logged = useSelector((state)=>state.authReducer.loggedStatus)
     const dispatch = useDispatch()
 
+    const [showDialog, setShowDialog] = useState(false)
+    const [deleteID,setDeleteID] = useState()
+
     const handleDeleteSwitch = async (id)=>{
         console.log(id)
         //const response = await deleteSwitch(id)
-        dispatch(delSwitchData(id))
+        setDeleteID(id)
+        setShowDialog(true)
         //console.log(response)
     }
   return (
@@ -57,6 +62,7 @@ function SwitchCard({device}) {
                 <td className='px-3 pt-1 pb-3'>{device.support}</td>
             </tr>
         </table>
+        {showDialog && <ConfirmPage deleteCategory="nswitch" deleteID={deleteID} setShowDialog={setShowDialog} />}
     </div>
   )
 }
