@@ -2,7 +2,7 @@ import React,{ useEffect, useState} from 'react'
 import { FaRegEdit,FaFileExport } from "react-icons/fa";
 import { CSVLink , CSVDownload } from "react-csv";
 import { VscExport } from "react-icons/vsc";
-import { NavLink, useFetcher } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { MdDeleteOutline } from "react-icons/md";
 import {deleteAP} from './../Utilities/api'
 import { useSelector, useDispatch } from 'react-redux'
@@ -12,11 +12,18 @@ import ConfirmPage from './ConfirmPage';
 
 function ShowAccessPoints() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  //const [confirmDelete, setConfirmDelete] = useState(false)
+  const [showDialog, setShowDialog] = useState(false)
+  const [deleteID,setDeleteID] = useState()
+  //const [deleteCategory,setDeleteCategory] = useState('ap')
+
   const logged = useSelector((state)=>state.authReducer.loggedStatus)
   const allBranches = useSelector(state => state.dataReducer.allBranches)
-  console.log("Branches",allBranches)
+  //console.log("Branches",allBranches)
   const allAPS= useSelector(state => state.dataReducer.allAPS)
-  console.log("APs",allAPS)
+  //console.log("APs",allAPS)
 
   //export to csv
   
@@ -47,17 +54,14 @@ function ShowAccessPoints() {
     })
   }
 
-  const handleDeleteAP = async (id)=>{
-    console.log(id)
-    dispatch(delAPData(id))
-    
-    //console.log(response)
-
+  const handleDeleteAP = (id) => {
+    setDeleteID(id)
+    setShowDialog(true)
   }
+  
   useEffect(()=>{
     dispatch(getBranchData())
     dispatch(getAPData())
-    
   },[])
 
   return (
@@ -110,6 +114,7 @@ function ShowAccessPoints() {
           </div>
           </div>)
         })}
+       {showDialog && <ConfirmPage deleteCategory="ap" deleteID={deleteID} setShowDialog={setShowDialog} />}
       </div>
     </div>
   )

@@ -500,3 +500,8 @@ export const checkLoginStatus = async ()=>{
         return error.data
     }
 }
+
+export const uploadDiagram = async (data) =>{
+    //const response = await axios.post()
+    console.log(data)
+}

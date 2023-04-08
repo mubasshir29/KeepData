@@ -9,6 +9,8 @@ import wlcModel from './../Models/ControllerModel.js'
 import apModel from './../Models/AccessPointModel.js'
 import ssidModel from './../Models/SsidModel.js'
 
+import multer from 'multer'
+
 
 export const getHomeData = (req,res)=>{
     
@@ -458,6 +460,21 @@ export const deleteSSID= async (req,res)=>{
     catch(error){
         res.status(400).json({"msg": "Delete failed"})
     }
+}
+
+export const saveDiagram = async (req,res,next)=>{
+    const upload = multer({dest: './../diagrams/'})
+
+    app.post('/api/images', upload.single('image'), (req, res) => {
+        // 4
+        const imageName = req.file.filename
+        const description = req.body.description
+      
+        // Save this data to a database probably
+      
+        console.log(description, imageName)
+        res.send({description, imageName})
+      })
 }
 
 export const loginHandler = async (req,res)=>{

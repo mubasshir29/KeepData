@@ -1,20 +1,25 @@
-import React from 'react'
+import React,{useState} from 'react'
 import logo from './../images/Instagram-Logo.png'
 import { FaRegEdit } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import {delBranchData} from './../Redux/dataSlice.js'
 import { MdDeleteOutline } from "react-icons/md";
+import ConfirmPage from './ConfirmPage';
 
 function BranchCard({branch}) {
     const logged = useSelector((state)=>state.authReducer.loggedStatus)
     const dispatch = useDispatch()
     //console.log(branch)
+
+    const [showDialog, setShowDialog] = useState(false)
+    const [deleteID,setDeleteID] = useState()
     
     const handleDeleteBranch = async (id)=>{
         console.log(id)
         //const response = await deleteAP(id)
-        dispatch(delBranchData(id))
+        setDeleteID(id)
+        setShowDialog(true)
         //console.log(response)
       }
   return (
@@ -46,8 +51,7 @@ function BranchCard({branch}) {
         </div>
         <img className='w-1/4 h-auto items-center grow-0 self-center' src={logo} />
         </div>
-        
-        
+        {showDialog && <ConfirmPage deleteCategory="branch" deleteID={deleteID} setShowDialog={setShowDialog} />}
     </div>
   )
 }

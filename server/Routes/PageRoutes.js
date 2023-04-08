@@ -1,5 +1,5 @@
 import express from 'express'
-import {getHomeData, addBranch,getBranchDetails,addInternetConnection,getInternetDetails,getFirewallDetails,addFirewall,getSwitchDetails,addSwitch,addWLC,getWLCDetails,addAP,getAPDetails,addSSID,getSSIDDetails,signupHandler,loginHandler,checkAuthentication,updateBranch,updateInternetConnection,updateFirewall,updateSwitch,updateWLC,updateAP,updateSSID,deleteBranch,deleteInternetConnection,deleteFirewall,deleteSwitch,deleteWLC,deleteAP,deleteSSID} from './../Controllers/pageController.js'
+import {getHomeData, addBranch,getBranchDetails,addInternetConnection,getInternetDetails,getFirewallDetails,addFirewall,getSwitchDetails,addSwitch,addWLC,getWLCDetails,addAP,getAPDetails,addSSID,getSSIDDetails,signupHandler,loginHandler,checkAuthentication,updateBranch,updateInternetConnection,updateFirewall,updateSwitch,updateWLC,updateAP,updateSSID,deleteBranch,deleteInternetConnection,deleteFirewall,deleteSwitch,deleteWLC,deleteAP,deleteSSID,saveDiagram} from './../Controllers/pageController.js'
 const pageRouter = express.Router()
 import verifyToken from './../Middleware/verifyToken.js'
 
@@ -64,5 +64,8 @@ pageRouter.delete('/delete/ssid/:id',deleteSSID)
 pageRouter.post('/login',loginHandler)
 pageRouter.post('/signUp',signupHandler)
 pageRouter.get('/isAuthenticated', verifyToken, checkAuthentication)
+
+//Diagrams
+pageRouter.post('/diag/upload', saveDiagram)
 
 export default pageRouter;

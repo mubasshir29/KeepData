@@ -21,7 +21,7 @@ function Sidebar() {
                 <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/wireless'><li className='flex items-center gap-3'><FaWifi/>WLC</li></NavLink>
                 <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/ssid'><li className='flex items-center gap-3'><IoMdWifi/>SSID</li></NavLink>
                 <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/access-points'><li className='flex items-center gap-3'><MdRouter/>Access Points</li></NavLink>
-                <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/diagrams'><li className='flex items-center gap-3'><BsFillDiagram3Fill/>Diagrams</li></NavLink>
+                {/* <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/diagrams'><li className='flex items-center gap-3'><BsFillDiagram3Fill/>Diagrams</li></NavLink> */}
                 <NavLink className='pl-10 py-2 w-full focus:outline-none hover:bg-purple-500 active:bg-purple-500 hover:text-white' to='/settings'><li className='flex items-center gap-3'><MdSettings/>Settings</li></NavLink>
                 
             </ul>
