@@ -1,19 +1,24 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { FaRegEdit } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import {delFirewallData} from './../Redux/dataSlice.js'
 import { MdDeleteOutline } from "react-icons/md";
+import ConfirmPage from './ConfirmPage.jsx';
 
 function FirewallCard({firewall}) {
     //console.log(firewall)
     const logged = useSelector((state)=>state.authReducer.loggedStatus)
     const dispatch = useDispatch()
 
+    const [showDialog, setShowDialog] = useState(false)
+    const [deleteID,setDeleteID] = useState()
+
     const handleDeleteBranch = async (id)=>{
         console.log(id)
         //const response = await deleteAP(id)
-        dispatch(delFirewallData(id))
+        setDeleteID(id)
+        setShowDialog(true)
         //console.log(response)
       }
   return (
@@ -52,6 +57,7 @@ function FirewallCard({firewall}) {
                 <td className='px-3 pt-1 pb-3'>{firewall.support}</td>
             </tr>
         </table>
+        {showDialog && <ConfirmPage deleteCategory="firewall" deleteID={deleteID} setShowDialog={setShowDialog} />}
     </div>
   )
 }

@@ -1,19 +1,24 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { FaRegEdit } from "react-icons/fa";
 import { NavLink } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 import {delInternetData} from './../Redux/dataSlice.js'
 import { MdDeleteOutline } from "react-icons/md";
+import ConfirmPage from './ConfirmPage.jsx';
 
 function InternetCard({internet}) {
      //console.log("Connection:",internet)
      const logged = useSelector((state)=>state.authReducer.loggedStatus)
     const dispatch = useDispatch()
 
+    const [showDialog, setShowDialog] = useState(false)
+    const [deleteID,setDeleteID] = useState()
+
     const handleDeleteBranch = async (id)=>{
         console.log(id)
         //const response = await deleteAP(id)
-        dispatch(delInternetData(id))
+        setDeleteID(id)
+        setShowDialog(true)
         //console.log(response)
       }
 
@@ -58,6 +63,7 @@ function InternetCard({internet}) {
                 <td className='px-3 py-1'>{internet.support}</td>
             </tr>
         </table>
+        {showDialog && <ConfirmPage deleteCategory="internet" deleteID={deleteID} setShowDialog={setShowDialog} />}
     </div>
   )
 }

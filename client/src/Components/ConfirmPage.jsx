@@ -17,7 +17,7 @@ function ConfirmPage(props) {
         }
         else {
             props.setShowDialog(false)
-            navigate('/access-points')}
+            }
     }
 
     const handleDelete = async ()=>{
